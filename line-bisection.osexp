@@ -23,7 +23,6 @@ set font_size 18
 set font_italic no
 set font_family mono
 set font_bold no
-set experiment_path "/Applications/OpenSesame.app/Contents/Resources/share/opensesame_resources/templates"
 set disable_garbage_collection yes
 set description "The main experiment item"
 set coordinates uniform
@@ -34,8 +33,19 @@ set background black
 define sequence experiment
 	set flush_keyboard yes
 	set description "Runs a number of items in sequence"
-	run getting_started always
-	run welcome always
+	run outside_loop always
+
+define loop experiment_loop
+	set source table
+	set repeat 1
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run line_bisection
 
 define notepad getting_started
 	__note__
@@ -50,6 +60,142 @@ define notepad getting_started
 	Have fun with OpenSesame!
 	__end__
 	set description "A simple notepad to document your experiment. This plug-in does nothing."
+
+define inline_script global_prep
+	set description "Executes Python code"
+	___run__
+	import csv
+	from datetime import datetime
+	from enum import Enum
+	
+	from libopensesame import sketchpad_elements
+	from openexp.keyboard import keyboard
+	
+	# packages useful for generating random arrays and selecting from them
+	# handing for varying target onset time
+	import random
+	from random import choice
+	import numpy as np
+	
+	m = Mouse()
+	myKeys = keyboard(exp, keylist=['space'])
+	
+	beep = items['beep']
+	blank = items['blank']
+	
+	#response items
+	stim, response = items['target'], items['target_mouse_response']
+	fixation = items['fixation']
+	
+	def in_bounds(x,y,bounds):
+		left, top, right, bottom = bounds
+		return x > left and x < right and y > top and y < bottom
+	
+	def wait_while_lmb_pressed(pressed, timeout=None, bounds=None, update_fn=None):
+	
+		"""
+		pressed == True : wait while mouse left button pressed,
+		within bounds if present
+		pressed == False : wait while mouse left button not pressed
+		bounds as (left, top, right, bottom)
+		"""
+		t0 = clock.time()
+		while m.get_pressed()[0] == pressed:
+			if pressed and bounds:
+				(x, y), time = m.get_pos()
+				if not in_bounds(x, y, bounds):
+					return TouchpadResult.OUT_OF_BOUNDS
+			if update_fn is None:
+				clock.sleep(1)
+			else:
+				c = Canvas()
+				update_fn(clock.time()-t0,c)
+				c.show()
+			if timeout and clock.time() - t0 >= timeout:
+				return TouchpadResult.TIMED_OUT
+		return TouchpadResult.LIFTED
+				
+	
+	# running info for degrees visual angle
+	# getting information about degrees visual angle
+	import math
+	from math import atan2, degrees
+	h = 17.5 #monitor height in cm
+	w = 31
+	d = 40 #distance between pp and monitor
+	ry = 1080 #vertical resolution of monitor
+	rx = 1920
+	
+	#deg_perPixY = degrees(atan2(.5*h, d))/(.5*ry)
+	#deg_perPixX =  degrees(atan2(.5*w, d))/(.5*rx)
+	#var.deg_perPix = (deg_perPixY + deg_perPixX)/2
+	#var.pix_perDeg = 1/var.deg_perPix
+	var.pix_perDeg = 43.1663 #taken from labview document
+	var.deg_perPix = 1/var.pix_perDeg
+	
+	var.targetSize_pix = var.pix_perDeg #size of target in pixels
+	var.targetSize_deg = var.targetSize_pix*var.deg_perPix #converting both fix target distance and size into deg
+	
+	#sizes in mm for reporting
+	var.pix_permm = ((ry/(h*10))+(rx/(w*10))) /2
+	var.mm_perPix = 1/var.pix_permm
+	var.cm_perPix = var.mm_perPix/10
+	var.targetSize_mm = var.mm_perPix * var.targetSize_pix
+	
+	# fixation cross width (1 deg)
+	fixWidth_pix = var.pix_perDeg
+	
+	# recording log file specfic to experiment
+	subject_nr_string = str(var.subject_nr)
+	date_str = datetime.now().isoformat()[:-7]
+	data_path = u'/home/experimenter/DMT-AD/DMT2019_rawdata/'
+	data_string = u'subject{sub}_{title}_{hand}_{date}.csv'
+	#individual subject path
+	data_dir = os.path.join(data_path,subject_nr_string)
+	if not os.path.exists(data_dir):
+			os.makedirs(data_dir)
+	data_outpath = os.path.join(data_dir, data_string)
+	datafile = log.open(data_outpath.format(sub=subject_nr_string, date=date_str, title=var.title, hand=var.hand))
+	
+	# target onset time array
+	target_onset_values = list(np.arange(250,850,100))
+	
+	#manual trial counter for limiting experiment to max 50 trials
+	var.valid_trial_count = 0
+	__end__
+	set _prepare ""
+
+define sequence line_bisection
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+
+define logger logger
+	set description "Logs experimental data"
+	set auto_log yes
+
+define sketchpad new_sketchpad
+	set duration keypress
+	set description "Displays stimuli"
+
+define loop outside_loop
+	set source table
+	set repeat 1
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run outside_sequence
+
+define sequence outside_sequence
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run global_prep always
+	run new_sketchpad always
+	run experiment_loop always
+	run logger always
 
 define sketchpad welcome
 	set start_response_interval no
