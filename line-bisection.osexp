@@ -1,7 +1,7 @@
 ---
 API: 2.1
 OpenSesame: 3.3.5
-Platform: posix
+Platform: nt
 ---
 set width 1024
 set uniform_coordinates yes
@@ -23,7 +23,7 @@ set font_size 18
 set font_italic no
 set font_family mono
 set font_bold no
-set experiment_path "/Users/Alex/Documents/git/IAPN"
+set experiment_path "\\\\chss.datastore.ed.ac.uk\\chss\\ppls\\users\\amitch17\\GitHub\\IAPN"
 set disable_garbage_collection yes
 set description "The main experiment item"
 set coordinates uniform
@@ -31,10 +31,21 @@ set compensation 0
 set canvas_backend psycho
 set background black
 
+define form_base custom_form
+	set timeout keypress
+	set spacing 10
+	set rows "1;1;1;1;1"
+	set only_render no
+	set margins "25;25;50;50"
+	set cols "1;1"
+	set _theme gray
+	widget 0 0 2 1 label center=no text="Please enter the width and height of your computer screen in cm"
+	widget 0 1 1 1 text_input center=no frame=yes return_accepts=yes stub="Type here …" var=response
+
+
 define sequence experiment
 	set flush_keyboard yes
 	set description "Runs a number of items in sequence"
-	run new_inline_script always
 	run outside_loop always
 
 define loop experiment_loop
@@ -112,6 +123,8 @@ define inline_script global_prep
 	# screen width & height- as defined by participant in form
 	var.width_cm = 60
 	var.height_cm = 35.5
+	#width_px = 1080
+	#height_px = 720
 	
 	#sizes in mm for reporting - based on resolution calculation earlier
 	var.pix_permmX = width_px/(var.width_cm*10) #x resolution divided by widthx10
@@ -181,14 +194,22 @@ define form_multiple_choice new_form_multiple_choice
 	set advance_immediately yes
 	set _theme gray
 
-define inline_script new_inline_script
-	set description "Executes Python code"
-	___run__
-	#### ALL IMPORTANT SCREEN RESOLUTION
-	import pyautogui
-	width_px, height_px = pyautogui.size()
-	__end__
-	set _prepare ""
+define form_text_input new_form_text_input
+	set timeout infinite
+	set spacing 10
+	set rows "1;1;6"
+	set only_render no
+	set margins "50;50;50;50"
+	set form_var response
+	set form_title Title
+	set form_question "Your question"
+	set description "A simple text input form"
+	set cols 1
+	set _theme gray
+	widget 0 0 1 1 label text="[form_title]"
+	widget 0 1 1 1 label center=no text="[form_question]"
+	widget 0 2 1 1 text_input focus=yes return_accepts=yes stub="" var="[form_var]"
+
 
 define sketchpad new_sketchpad
 	set duration keypress
@@ -213,29 +234,68 @@ define sequence outside_sequence
 	set description "Runs a number of items in sequence"
 	run global_prep always
 	run new_sketchpad always
+	run screen_resolution always
+	run custom_form always
 	run experiment_loop always
 	run logger always
 
-define form_text_input screen_size_form
-	set timeout infinite
-	set spacing 10
-	set rows "1;1;6"
-	set only_render no
-	set margins "50;50;50;50"
-	set form_var response
-	set form_title "Screen size"
-	__form_question__
-	What is the height of your screen?
-	
-	What is the width of your screen?
+define inline_script screen_resolution
+	set description "Executes Python code"
+	___run__
+	#### ALL IMPORTANT SCREEN RESOLUTION
+	#import pyautogui
+	#width_px, height_px = pyautogui.size()
 	__end__
-	set description "A simple text input form"
-	set cols 1
-	set _theme gray
-	widget 0 0 1 1 label text="[form_title]"
-	widget 0 1 1 1 label center=no text="[form_question]"
-	widget 0 2 1 1 text_input focus=yes return_accepts=yes stub="" var="[form_var]"
+	___prepare__
+	#### ALL IMPORTANT SCREEN RESOLUTION
+	import tkinter as tk
+	
+	root = tk.Tk()
+	
+	width_px = root.winfo_screenwidth()
+	height_px = root.winfo_screenheight()
+	__end__
 
+define inline_script screen_size_form
+	set description "Executes Python code"
+	___run__
+	def filter_digits(ch):
+	
+	    """Allows only digit characters as input"""
+	
+	    return ch in u'0123456789'
+	    
+	# Create a form
+	form = Form(
+	    cols=[1,1,1], rows=[1,1,1]
+	)
+	
+	# Create four widgets
+	labelTitle = Label(text=u'Screen size')
+	labelQuestion = Label(
+	    text=u'Please enter the width and height of your computer screen in cm',
+	    center=False
+	)
+	label_width = Label(u'Screen width:')
+	width_text = TextInput(stub=u'Width         …', var='width', key_filter=filter_digits
+	)
+	label_height = Label(u'Screen height:')
+	height_text = TextInput(stub=u'Height         …', var='height', key_filter=filter_digits
+	)
+	# Add the widgets to the form. The position in the form is indicated as a
+	# (column, row) tuple.
+	form.set_widget(labelTitle, (0,0), colspan = 2)
+	form.set_widget(labelQuestion, (0,1), colspan = 2)
+	form.set_widget(label_width, (0,1))
+	form.set_widget(label_height, (1,1))
+	form.set_widget(width_text, (0,1))
+	form.set_widget(height_text, (1,1))
+	# Execute the form! In this case, the form will return the text of the button that
+	# was clicked. This is one way to get a return value out of the form. Another way
+	# is to use the 'var' keyword, supported some of the widgets.
+	dimensions = form._exec()
+	__end__
+	set _prepare ""
 
 define sketchpad welcome
 	set start_response_interval no
