@@ -1,4 +1,4 @@
-﻿condition,start_mm,end_mm,line_y_pos,length_mm
+line,left_mm,right_mm,line_y_pos,linelength_mm
 1,-40,40,0,80
 2,-40,80,0,120
 3,-80,40,0,120

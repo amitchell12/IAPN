@@ -1,20 +1,28 @@
 ---
 API: 2.1
+<<<<<<< Updated upstream
 OpenSesame: 3.3.5
 Platform: nt
+=======
+OpenSesame: 3.2.8b1
+Platform: posix
+>>>>>>> Stashed changes
 ---
-set width 1024
+set width 1920
 set uniform_coordinates yes
-set title "New experiment"
+set title IAPN
 set subject_parity even
 set subject_nr 0
-set start experiment
+set start main
 set sound_sample_size -16
 set sound_freq 48000
 set sound_channels 2
 set sound_buf_size 1024
+set sampler_backend legacy
 set round_decimals 2
-set height 768
+set mouse_backend psycho
+set keyboard_backend psycho
+set height 1080
 set fullscreen no
 set form_clicks no
 set foreground white
@@ -23,14 +31,21 @@ set font_size 18
 set font_italic no
 set font_family mono
 set font_bold no
+<<<<<<< Updated upstream
 set experiment_path "\\\\chss.datastore.ed.ac.uk\\chss\\ppls\\users\\amitch17\\GitHub\\IAPN"
+=======
+set experiment_path "/home/experimenter/IAPN"
+>>>>>>> Stashed changes
 set disable_garbage_collection yes
 set description "The main experiment item"
 set coordinates uniform
 set compensation 0
+set color_backend psycho
+set clock_backend psycho
 set canvas_backend psycho
 set background black
 
+<<<<<<< Updated upstream
 define form_base custom_form
 	set timeout keypress
 	set spacing 10
@@ -47,11 +62,36 @@ define sequence experiment
 	set flush_keyboard yes
 	set description "Runs a number of items in sequence"
 	run outside_loop always
+=======
+define sketchpad blank
+	set duration 150
+	set description "Displays stimuli"
+
+define form_multiple_choice centre_mouse
+	set timeout infinite
+	set spacing 10
+	set question ""
+	set options "Click me"
+	set margins "50;50;50;50"
+	set form_var response
+	set form_title "Form title"
+	set description "A simple multiple choice item"
+	set button_text Ok
+	set allow_multiple no
+	set advance_immediately yes
+	set _theme gray
+
+define sketchpad click_here
+	set duration 0
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=20 html=yes show_if=always text="Click the dot" x=0 y=450 z_index=0
+	draw fixdot color=white show_if=always style=default x=0 y=400 z_index=0
+>>>>>>> Stashed changes
 
 define loop experiment_loop
 	set source_file "line-bisection_stim.csv"
 	set source file
-	set repeat 1
+	set repeat 25
 	set order random
 	set description "Repeatedly runs another item"
 	set cycles 1
@@ -66,14 +106,29 @@ define inline_script experiment_script
 	set _run ""
 	___prepare__
 	## preparing for the experiment
-	# taking information from file_pool and converting to memoryview
-	## things that need to be defined here: line length, fix size
+	# calculate mm per pixel based on debit card actual length + pixels of line from this 
+	# screen width & height- as defined by participant in form
+	var.pix_permm = var.card_pix/var.card_mm #x resolution divided by widthx10
 	
 	# start-point of the line
-	var.start_pix = var.pix_permmX*var.start_mm
-	var.end_pix = var.pix_permmX*var.end_mm
-	var.y_pix = var.pix_permmX*var.line_y_pos
+	var.left_pix = var.pix_permm*var.left_mm
+	var.right_pix = var.pix_permm*var.right_mm
+	var.y_pix = var.pix_permm*var.line_y_pos
+	
+	# get line length in pixels for later calc
+	var.linelength_pix = var.linelength_mm*var.pix_permm
+	
+	var.line_pres_time = clock.time() - t0
+	
+	#set void trial back to 0
+	var.void_trial = 0
 	__end__
+
+define sequence experiment_sequence
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run line_bisection_intro always
+	run experiment_loop always
 
 define notepad getting_started
 	__note__
@@ -105,8 +160,10 @@ define inline_script global_prep
 	from random import choice
 	import numpy as np
 	
+	import math
+	
 	m = Mouse()
-	myKeys = keyboard(exp, keylist=['space'])
+	myKeys = keyboard(exp, keylist=['space','left','right','return'])
 	
 	#beep = items['beep']
 	#blank = items['blank']
@@ -115,11 +172,19 @@ define inline_script global_prep
 	stim, response = items['line'], items['line_mouse_response']
 	#fixation = items['fixation']
 	
+	# defining bounding box for target response
 	def in_bounds(x,y,bounds):
 		left, top, right, bottom = bounds
 		return x > left and x < right and y > top and y < bottom
 	
+	# screen measurement variables that need defining
+	var.breaking_variable = False
+	# line location
+	var.screen_test_x1 = -450
+	var.screen_test_x2 = 0
+	var.card_mm = 86 #for finding mm per pix
 	
+<<<<<<< Updated upstream
 	# screen width & height- as defined by participant in form
 	var.width_cm = 60
 	var.height_cm = 35.5
@@ -129,6 +194,9 @@ define inline_script global_prep
 	#sizes in mm for reporting - based on resolution calculation earlier
 	var.pix_permmX = width_px/(var.width_cm*10) #x resolution divided by widthx10
 	var.pix_permmY = height_px/(var.height_cm*10) 
+=======
+	t0 = clock.time()
+>>>>>>> Stashed changes
 	
 	# recording log file specfic to experiment
 	subject_nr_string = str(var.subject_nr)
@@ -150,10 +218,28 @@ define inline_script global_prep
 	__end__
 	set _prepare ""
 
+define inline_script invalid_trial_check
+	set description "Executes Python code"
+	___run__
+	#marking voided trial when they click outside bounds of line
+	if self.get('cursor_y') > (var.pix_permm*10):
+		var.void_trial = 1
+	
+	if self.get('cursor_y') < (var.pix_permm*-10):
+		var.void_trial = 1
+		
+	if self.get('cursor_x') < (var.left_pix):
+		var.void_trial = 1
+		
+	if self.get('cursor_x') > (var.right_pix):
+		var.void_trial = 1
+	__end__
+	set _prepare ""
+
 define sketchpad line
 	set duration 0
 	set description "Displays stimuli"
-	draw line color=white penwidth=5 show_if=always x1="[start_pix]" x2="[end_pix]" y1="[y_pix]" y2="[y_pix]" z_index=0
+	draw line color=white penwidth=5 show_if=always x1="[left_pix]" x2="[right_pix]" y1="[y_pix]" y2="[y_pix]" z_index=0
 
 define sequence line_bisection
 	set flush_keyboard yes
@@ -161,6 +247,18 @@ define sequence line_bisection
 	run experiment_script always
 	run line always
 	run line_mouse_response always
+	run blank always
+	run mouse_response_reset always
+	run click_here never
+	run new_mouse_response_1 never
+	run invalid_trial_check always
+	run logger always
+	run repeat_invalid always
+
+define sketchpad line_bisection_intro
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Instruction screen" x=0 y=0 z_index=0
 
 define mouse_response line_mouse_response
 	set timeout infinite
@@ -174,7 +272,51 @@ define mouse_response line_mouse_response
 
 define logger logger
 	set description "Logs experimental data"
-	set auto_log yes
+	set auto_log no
+	log avg_rt
+	log card_mm
+	log card_pix
+	log count_line_bisection
+	log bisect_x
+	log bisect_y
+	log datetime
+	log left_mm
+	log left_pix
+	log right_mm
+	log right_pix
+	log line
+	log linelength_mm
+	log line_response_time
+	log line_y_pos
+	log mouse_pos
+	log pix_permm
+	log void_trial
+	log linelength_pix
+
+define sequence main
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run outside_loop always
+
+define inline_script mouse_response_reset
+	set description "Executes Python code"
+	___run__
+	
+	#get mouse response location
+	(x,y),time = m.get_pos()
+	var.bisect_x = x
+	var.bisect_y = y
+	var.line_end_time = time - t0
+	
+	# get response time, just incase
+	var.line_response_time = var.line_end_time - var.line_pres_time
+	
+	# randomly setting mouse position between -15 and +15mm
+	mouse_pos_list = list(np.arange((var.pix_permm*-15),(var.pix_permm*15),10))
+	var.mouse_pos = random.choice(mouse_pos_list)
+	m.set_pos(pos=(var.mouse_pos,var.pix_permm*50))
+	__end__
+	set _prepare ""
 
 define form_multiple_choice new_form_multiple_choice
 	set timeout infinite
@@ -211,10 +353,31 @@ define form_text_input new_form_text_input
 	widget 0 2 1 1 text_input focus=yes return_accepts=yes stub="" var="[form_var]"
 
 
-define sketchpad new_sketchpad
+define keyboard_response new_keyboard_response
+	set timeout infinite
+	set flush yes
+	set event_type keypress
 	set duration keypress
-	set description "Displays stimuli"
-	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Instruction screen" x=0 y=0 z_index=0
+	set description "Collects keyboard responses"
+	set allowed_responses "left;right"
+
+define mouse_response new_mouse_response
+	set timeout infinite
+	set show_cursor yes
+	set linked_sketchpad ""
+	set flush yes
+	set event_type mouseclick
+	set duration mouseclick
+	set description "Collects mouse responses"
+
+define mouse_response new_mouse_response_1
+	set timeout infinite
+	set show_cursor yes
+	set linked_sketchpad click_here
+	set flush yes
+	set event_type mouseclick
+	set duration mouseclick
+	set description "Collects mouse responses"
 
 define loop outside_loop
 	set source_file ""
@@ -233,11 +396,103 @@ define sequence outside_sequence
 	set flush_keyboard yes
 	set description "Runs a number of items in sequence"
 	run global_prep always
+<<<<<<< Updated upstream
 	run new_sketchpad always
 	run screen_resolution always
 	run custom_form always
 	run experiment_loop always
 	run logger always
+=======
+	run screen_loop always
+	run experiment_sequence always
+
+define inline_script repeat_invalid
+	set description "Executes Python code"
+	___run__
+	# repeat trial if click along the y-axis was over 2cm away from the line
+	# forcing accuracy
+	
+	if self.get('cursor_y') > (var.pix_permm*10):
+			# prepare trail sequence again
+		exp.items['line_bisection'].prepare()
+		# re-run trial sequence
+		exp.items['line_bisection'].run()
+		void_trial = 1
+	
+	if self.get('cursor_y') < (var.pix_permm*-10):
+			# prepare trail sequence again
+		exp.items['line_bisection'].prepare()
+		# re-run trial sequence
+		exp.items['line_bisection'].run()
+		void_trial = 1
+		
+	if self.get('cursor_x') < (var.left_pix):
+			# prepare trail sequence again
+		exp.items['line_bisection'].prepare()
+		# re-run trial sequence
+		exp.items['line_bisection'].run()
+		void_trial = 1
+		
+	if self.get('cursor_x') > (var.right_pix):
+			# prepare trail sequence again
+		exp.items['line_bisection'].prepare()
+		# re-run trial sequence
+		exp.items['line_bisection'].run()
+		void_trial = 1
+		
+	else: 
+		void_trial = 0
+	__end__
+	set _prepare ""
+
+define inline_script screen_info_script
+	set description "Executes Python code"
+	___run__
+	screen_key, screen_time = myKeys.get_key()
+	
+	if screen_key == 'left':
+		var.screen_test_x2 = var.screen_test_x2 - 5
+		var.breaking_variable = False
+		
+	if screen_key == 'right':
+		var.screen_test_x2 = var.screen_test_x2 + 5
+		var.breaking_variable = False
+		
+	if screen_key == 'space':
+		var.breaking_variable = True
+		var.card_pix = var.screen_test_x2 - var.screen_test_x1
+	__end__
+	set _prepare ""
+
+define sketchpad screen_instructions
+	set duration keypress
+	set description "Displays stimuli"
+
+define loop screen_loop
+	set source_file ""
+	set source table
+	set repeat 50
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if "[breaking_variable] = yes"
+	setcycle 0 empty_column ""
+	run screen_sequence
+
+define sketchpad screen_measurements
+	set duration 0
+	set description "Displays stimuli"
+	draw line color=white penwidth=5 show_if=always x1="[screen_test_x1]" x2="[screen_test_x2]" y1=-200 y2=-200 z_index=0
+	draw textline center=0 color=white font_bold=no font_family=sans font_italic=no font_size=24 html=yes show_if=always text="Before the next task, we need to know the resolution of your screen.<br /><br />Place the long edge of a DEBIT/CREDIT card against the line. <br />Press the LEFT or RIGHT arrow keys to adjust length of the line until it is the same length as the debit/credit card<br /><br />Press 'SPACE' when done" x=-448 y=0 z_index=0
+
+define sequence screen_sequence
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run screen_measurements always
+	run screen_info_script always
+>>>>>>> Stashed changes
 
 define inline_script screen_resolution
 	set description "Executes Python code"
