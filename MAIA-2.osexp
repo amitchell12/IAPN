@@ -1,0 +1,279 @@
+---
+API: 2.1
+OpenSesame: 3.3.6
+Platform: nt
+---
+set width 1024
+set uniform_coordinates yes
+set title "Nuevo experimento"
+set subject_parity even
+set subject_nr 0
+set start experiment
+set sound_sample_size -16
+set sound_freq 48000
+set sound_channels 2
+set sound_buf_size 1024
+set round_decimals 2
+set height 768
+set fullscreen no
+set form_clicks no
+set foreground white
+set font_underline no
+set font_size 18
+set font_italic no
+set font_family mono
+set font_bold no
+set experiment_path "C:/Program Files (x86)/OpenSesame/share/opensesame_resources"
+set disable_garbage_collection yes
+set description "The main experiment item"
+set coordinates uniform
+set compensation 0
+set canvas_backend psycho
+set background black
+
+define form_base _1
+	set timeout infinite
+	set spacing 10
+	set rows "1;1;1;1;1;1"
+	set only_render no
+	set margins "50;50;50;50"
+	set description "A generic form plug-in"
+	set cols "1;1"
+	set _theme gray
+	widget 0 0 2 1 label text="Indicate how often does each statement applies to you generally in everyday life (0= Never, 5= Always)"
+	widget 0 1 1 1 label center=no text=" When I am tense I notice where the tension is located in my body."
+	widget 1 1 1 1 rating_scale nodes="0;1;2;3;4;5" var=question1
+	widget 0 2 1 1 label center=no text=" I notice when I am uncomfortable in my body."
+	widget 1 2 1 1 rating_scale nodes="0;1;2;3;4;5" var=question2
+	widget 0 3 1 1 label center=no text=" I notice where in my body I am comfortable"
+	widget 1 3 1 1 rating_scale nodes="0;1;2;3;4;5" var=question3
+	widget 0 4 1 1 label center=no text="  I notice changes in my breathing, such as whether it slows down or speeds up."
+	widget 1 4 1 1 rating_scale nodes="0;1;2;3;4;5" var=question4
+	widget 0 5 2 1 button text=Next
+
+
+define form_base _2
+	set timeout infinite
+	set spacing 10
+	set rows "1;1;1;1;1;1;1;1;1"
+	set only_render no
+	set margins "50;50;50;50"
+	set description "A generic form plug-in"
+	set cols "1;1"
+	set _theme gray
+	widget 0 1 1 1 label center=no text=" I ignore physical tension or discomfort until they become more severe."
+	widget 1 1 1 1 rating_scale nodes="0;1;2;3;4;5" var=question5
+	widget 0 2 1 1 label center=no text="I distract myself from sensations of discomfort."
+	widget 1 2 1 1 rating_scale nodes="0;1;2;3;4;5" var=question6
+	widget 0 3 1 1 label center=no text="  When I feel pain or discomfort, I try to power through it. "
+	widget 1 3 1 1 rating_scale nodes="0;1;2;3;4;5" var=question7
+	widget 0 4 1 1 label center=no text="I try to ignore pain"
+	widget 1 4 1 1 rating_scale nodes="0;1;2;3;4;5" var=question8
+	widget 0 5 1 1 label center=no text="I push feelings of discomfort away by focusing on something. "
+	widget 1 5 1 1 rating_scale nodes="0;1;2;3;4;5" var=question9
+	widget 0 6 1 1 label center=no text="When I feel unpleasant body sensations, I occupy myself with something else so I don’t have to feel them."
+	widget 1 6 1 1 rating_scale nodes="0;1;2;3;4;5" var=question10
+	widget 0 8 2 1 button text=Next
+
+
+define form_base _3
+	set timeout infinite
+	set spacing 10
+	set rows "1;1;1;1;1;1;1;1;1"
+	set only_render no
+	set margins "50;50;50;50"
+	set description "A generic form plug-in"
+	set cols "1;1"
+	set _theme gray
+	widget 0 1 1 1 label center=no text="When I feel physical pain, I become upset."
+	widget 1 1 1 1 rating_scale nodes="0;1;2;3;4;5" var=question11
+	widget 0 2 1 1 label center=no text="I start to worry that something is wrong if I feel any discomfort."
+	widget 1 2 1 1 rating_scale nodes="0;1;2;3;4;5" var=question12
+	widget 0 3 1 1 label center=no text="I can notice an unpleasant body sensation without worrying about it."
+	widget 1 3 1 1 rating_scale nodes="0;1;2;3;4;5" var=question13
+	widget 0 4 1 1 label center=no text="I can stay calm and not worry when I have feelings of discomfort or pain. "
+	widget 1 4 1 1 rating_scale nodes="0;1;2;3;4;5" var=question14
+	widget 0 5 1 1 label center=no text="When I am in discomfort or pain I can’t get it out of my mind. "
+	widget 1 5 1 1 rating_scale nodes="0;1;2;3;4;5" var=question15
+	widget 0 6 1 1 label center=no text="I can pay attention to my breath without being distracted by things happening around me."
+	widget 1 6 1 1 rating_scale nodes="0;1;2;3;4;5" var=question16
+	widget 0 8 2 1 button text=Next
+
+
+define form_base _4
+	set timeout infinite
+	set spacing 10
+	set rows "1;1;1;1;1;1;1;1;1"
+	set only_render no
+	set margins "50;50;50;50"
+	set description "A generic form plug-in"
+	set cols "1;1"
+	set _theme gray
+	widget 0 1 1 1 label center=no text=" I can maintain awareness of my inner bodily sensations even when there is a lot going on around me."
+	widget 1 1 1 1 rating_scale nodes="0;1;2;3;4;5" var=question17
+	widget 0 2 1 1 label center=no text=" When I am in conversation with someone, I can pay attention to my posture."
+	widget 1 2 1 1 rating_scale nodes="0;1;2;3;4;5" var=question18
+	widget 0 3 1 1 label center=no text=" I can return awareness to my body if I am distracted."
+	widget 1 3 1 1 rating_scale nodes="0;1;2;3;4;5" var=question19
+	widget 0 4 1 1 label center=no text=" I can refocus my attention from thinking to sensing my body."
+	widget 1 4 1 1 rating_scale nodes="0;1;2;3;4;5" var=question20
+	widget 0 5 1 1 label center=no text=" I can maintain awareness of my whole body even when a part of me is in pain or discomfort. "
+	widget 1 5 1 1 rating_scale nodes="0;1;2;3;4;5" var=question21
+	widget 0 6 1 1 label center=no text="I can pay attention to my breath without being distracted by things happening around me."
+	widget 1 6 1 1 rating_scale nodes="0;1;2;3;4;5" var=question16
+	widget 0 8 2 1 button text=Next
+
+
+define form_base _5
+	set timeout infinite
+	set spacing 10
+	set rows "1;1;1;1;1;1;1;1;1"
+	set only_render no
+	set margins "50;50;50;50"
+	set description "A generic form plug-in"
+	set cols "1;1"
+	set _theme gray
+	widget 0 1 1 1 label center=no text=" I notice how my body changes when I am angry."
+	widget 1 1 1 1 rating_scale nodes="0;1;2;3;4;5" var=question23
+	widget 0 2 1 1 label center=no text=" When something is wrong in my life I can feel it in my body."
+	widget 1 2 1 1 rating_scale nodes="0;1;2;3;4;5" var=question24
+	widget 0 3 1 1 label center=no text=" I notice that my body feels different after a peaceful experience."
+	widget 1 3 1 1 rating_scale nodes="0;1;2;3;4;5" var=question25
+	widget 0 4 1 1 label center=no text=" I notice that my breathing becomes free and easy when I feel comfortable."
+	widget 1 4 1 1 rating_scale nodes="0;1;2;3;4;5" var=question26
+	widget 0 5 1 1 label center=no text=". I notice how my body changes when I feel happy / joyful "
+	widget 1 5 1 1 rating_scale nodes="0;1;2;3;4;5" var=question27
+	widget 0 6 1 1 label center=no text=" When I feel overwhelmed I can find a calm place inside."
+	widget 1 6 1 1 rating_scale nodes="0;1;2;3;4;5" var=question28
+	widget 0 8 2 1 button text=Next
+
+
+define form_base _6
+	set timeout infinite
+	set spacing 10
+	set rows "1;1;1;1;1;1;1;1;1"
+	set only_render no
+	set margins "50;50;50;50"
+	set description "A generic form plug-in"
+	set cols "1;1"
+	set _theme gray
+	widget 0 1 1 1 label center=no text=" When I bring awareness to my body I feel a sense of calm."
+	widget 1 1 1 1 rating_scale nodes="0;1;2;3;4;5" var=question29
+	widget 0 2 1 1 label center=no text="I can use my breath to reduce tension."
+	widget 1 2 1 1 rating_scale nodes="0;1;2;3;4;5" var=question30
+	widget 0 3 1 1 label center=no text="When I am caught up in thoughts, I can calm my mind by focusing on my body/breathing."
+	widget 1 3 1 1 rating_scale nodes="0;1;2;3;4;5" var=question31
+	widget 0 4 1 1 label center=no text=" I listen for information from my body about my emotional state. "
+	widget 1 4 1 1 rating_scale nodes="0;1;2;3;4;5" var=question32
+	widget 0 5 1 1 label center=no text="When I am upset, I take time to explore how my body feels."
+	widget 1 5 1 1 rating_scale nodes="0;1;2;3;4;5" var=question33
+	widget 0 6 1 1 label center=no text="I listen to my body to inform me about what to do. "
+	widget 1 6 1 1 rating_scale nodes="0;1;2;3;4;5" var=question34
+	widget 0 8 2 1 button text=Next
+
+
+define sequence experiment
+	set flush_keyboard yes
+	set description "Corre un número de objetos en secuencia"
+	run getting_started always
+	run welcome always
+	run new_form_consent always
+	run _1 always
+	run _2 always
+	run _3 always
+	run _4 always
+	run _5 always
+	run _6 always
+	run new_form_base always
+
+define notepad getting_started
+	__note__
+	Welcome to OpenSesame 3.3 "Lentiform Loewenfeld"!
+	If you are new to OpenSesame, it is a good idea to follow one of the tutorials,
+	which can be found on the documentation site:
+	- <http://osdoc.cogsci.nl/>
+	You can also check out the examples. These can be opened via:
+	- Menu -> Tools -> Example experiments.
+	And feel free to ask for help on the forum:
+	- <http://forum.cogsci.nl/>
+	Have fun with OpenSesame!
+	__end__
+	set description "A simple notepad to document your experiment. This plug-in does nothing."
+
+define form_base new_form_base
+	set timeout infinite
+	set spacing 10
+	set rows "1;1;1;1;1;1"
+	set only_render no
+	set margins "50;50;50;50"
+	set description "A generic form plug-in"
+	set cols "1;1"
+	set _theme gray
+	widget 0 1 1 1 label center=no text="I am at home in my body"
+	widget 1 1 1 1 rating_scale nodes="0;1;2;3;4;5" var=question35
+	widget 0 2 1 1 label center=no text=" I feel my body is a safe place."
+	widget 1 2 1 1 rating_scale nodes="0;1;2;3;4;5" var=question36
+	widget 0 3 1 1 label center=no text="I trust my body sensations."
+	widget 1 3 1 1 rating_scale nodes="0;1;2;3;4;5" var=question37
+	widget 0 5 2 1 button text=Next
+
+
+define form_consent new_form_consent
+	set timeout infinite
+	set spacing 10
+	set rows "1;4;1;1"
+	set only_render no
+	set margins "50;50;50;50"
+	set form_title "Consent form"
+	__form_text__
+	You are about to participate in a voluntary experiment.
+	
+	This experiment poses no known risks to your health and your name will not be associated with the findings.Data will only be accessed by members of the research group.
+	
+	Upon completion of your participation in this study you will be provided with a brief explanation of the question this study addresses.
+	
+	If you have any questions not addressed by this consent form, please do not hesitate to ask.
+	
+	You can stop at any time during experiment if you feel uncomfortable.
+	
+	If you wish to withdraw your data after completing the experiment,you can email the address provided. You can request to be withdrawn up to one month after data collection is completed, without needing to provide a reason.
+	__end__
+	set description "A simple consent form"
+	set decline_text "Do not participate"
+	set decline_message "You need to accept the consent form to participate!"
+	set cols "2;2"
+	set checkbox_text "I have read and understood the information shown above"
+	set accept_text "Participate!"
+	set _theme gray
+	widget 0 0 2 1 label text="[form_title]"
+	widget 0 1 2 1 label center=no text="[form_text]"
+	widget 0 2 2 1 checkbox text="[checkbox_text]" var=checkbox_status
+	widget 0 3 1 1 button text="[accept_text]" var=accept_status
+	widget 1 3 1 1 button text="[decline_text]"
+
+
+define form_multiple_choice new_form_multiple_choice
+	set timeout infinite
+	set spacing 10
+	set question "Your question"
+	__options__
+	Yes
+	No
+	Maybe
+	__end__
+	set margins "50;50;50;50"
+	set form_var response
+	set form_title "Form title"
+	set description "A simple multiple choice item"
+	set button_text Ok
+	set allow_multiple yes
+	set advance_immediately yes
+	set _theme gray
+
+define sketchpad welcome
+	set start_response_interval no
+	set reset_variables no
+	set duration keypress
+	set description "Muestra estímulos"
+	draw textline center=1 color=white font_bold=yes font_family=serif font_italic=no font_size=38 html=yes show_if=always text="THE EMBODIED BRAIN" x=0 y=0 z_index=0
+
