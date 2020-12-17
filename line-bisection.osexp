@@ -1,12 +1,7 @@
 ---
 API: 2.1
-<<<<<<< Updated upstream
 OpenSesame: 3.3.5
 Platform: nt
-=======
-OpenSesame: 3.2.8b1
-Platform: posix
->>>>>>> Stashed changes
 ---
 set width 1920
 set uniform_coordinates yes
@@ -31,11 +26,7 @@ set font_size 18
 set font_italic no
 set font_family mono
 set font_bold no
-<<<<<<< Updated upstream
-set experiment_path "\\\\chss.datastore.ed.ac.uk\\chss\\ppls\\users\\amitch17\\GitHub\\IAPN"
-=======
-set experiment_path "/home/experimenter/IAPN"
->>>>>>> Stashed changes
+set experiment_path "C:\\Users\\amitch17\\Downloads"
 set disable_garbage_collection yes
 set description "The main experiment item"
 set coordinates uniform
@@ -45,194 +36,1692 @@ set clock_backend psycho
 set canvas_backend psycho
 set background black
 
-<<<<<<< Updated upstream
-define form_base custom_form
-	set timeout keypress
-	set spacing 10
-	set rows "1;1;1;1;1"
-	set only_render no
-	set margins "25;25;50;50"
-	set cols "1;1"
-	set _theme gray
-	widget 0 0 2 1 label center=no text="Please enter the width and height of your computer screen in cm"
-	widget 0 1 1 1 text_input center=no frame=yes return_accepts=yes stub="Type here …" var=response
-
-
-define sequence experiment
-	set flush_keyboard yes
-	set description "Runs a number of items in sequence"
-	run outside_loop always
-=======
-define sketchpad blank
-	set duration 150
+define sketchpad check_card
+	set duration keypress
 	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=32 html=yes show_if=always text="If you your line was not the length of a debit card, <br />please press 'esc' and 'Q' to restart the experiment & try again.<br /><br />If your line matched the length of a debit card, press SPACE to proceed" x=0 y=0 z_index=0
 
-define form_multiple_choice centre_mouse
-	set timeout infinite
-	set spacing 10
-	set question ""
-	set options "Click me"
-	set margins "50;50;50;50"
-	set form_var response
-	set form_title "Form title"
-	set description "A simple multiple choice item"
-	set button_text Ok
-	set allow_multiple no
-	set advance_immediately yes
-	set _theme gray
-
-define sketchpad click_here
+define sketchpad click_here_1
 	set duration 0
 	set description "Displays stimuli"
-	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=20 html=yes show_if=always text="Click the dot" x=0 y=450 z_index=0
-	draw fixdot color=white show_if=always style=default x=0 y=400 z_index=0
->>>>>>> Stashed changes
+	draw textline center=1 color=white font_bold=yes font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Click the dot" x=0 y="[click_pix_y]" z_index=0
+	draw fixdot color=white show_if=always style=default x="[mouse_loc_pix]" y="[mouse_loc_pix_y]" z_index=0
+
+define sketchpad click_here_1_1
+	set duration 0
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=yes font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Click the dot" x=0 y="[click_pix_y]" z_index=0
+	draw fixdot color=white show_if=always style=default x="[mouse_loc_pix]" y="[mouse_loc_pix_y]" z_index=0
+
+define mouse_response click_here_resp
+	set timeout infinite
+	set show_cursor yes
+	set linked_sketchpad ""
+	set flush yes
+	set event_type mouseclick
+	set duration mouseclick
+	set description "Collects mouse responses"
+	set allowed_responses "left_button;right_button"
+
+define mouse_response click_here_resp_1
+	set timeout infinite
+	set show_cursor yes
+	set linked_sketchpad ""
+	set flush yes
+	set event_type mouseclick
+	set duration mouseclick
+	set description "Collects mouse responses"
+	set allowed_responses "left_button;right_button"
 
 define loop experiment_loop
 	set source_file "line-bisection_stim.csv"
-	set source file
-	set repeat 25
+	set source table
+	set repeat 16
 	set order random
 	set description "Repeatedly runs another item"
-	set cycles 1
+	set cycles 512
 	set continuous no
 	set break_if_on_first yes
 	set break_if never
-	setcycle 0 empty_column ""
+	setcycle 0 left_mm -40
+	setcycle 0 mouse_loc 15
+	setcycle 0 right_mm 40
+	setcycle 1 left_mm -40
+	setcycle 1 mouse_loc 15
+	setcycle 1 right_mm 40
+	setcycle 2 left_mm -80
+	setcycle 2 mouse_loc 15
+	setcycle 2 right_mm 40
+	setcycle 3 left_mm -80
+	setcycle 3 mouse_loc 15
+	setcycle 3 right_mm 40
+	setcycle 4 left_mm -40
+	setcycle 4 mouse_loc 15
+	setcycle 4 right_mm 40
+	setcycle 5 left_mm -40
+	setcycle 5 mouse_loc 15
+	setcycle 5 right_mm 40
+	setcycle 6 left_mm -80
+	setcycle 6 mouse_loc 15
+	setcycle 6 right_mm 40
+	setcycle 7 left_mm -80
+	setcycle 7 mouse_loc 15
+	setcycle 7 right_mm 40
+	setcycle 8 left_mm -40
+	setcycle 8 mouse_loc 15
+	setcycle 8 right_mm 40
+	setcycle 9 left_mm -40
+	setcycle 9 mouse_loc 15
+	setcycle 9 right_mm 40
+	setcycle 10 left_mm -80
+	setcycle 10 mouse_loc 15
+	setcycle 10 right_mm 40
+	setcycle 11 left_mm -80
+	setcycle 11 mouse_loc 15
+	setcycle 11 right_mm 40
+	setcycle 12 left_mm -40
+	setcycle 12 mouse_loc 15
+	setcycle 12 right_mm 40
+	setcycle 13 left_mm -40
+	setcycle 13 mouse_loc 15
+	setcycle 13 right_mm 40
+	setcycle 14 left_mm -80
+	setcycle 14 mouse_loc 15
+	setcycle 14 right_mm 40
+	setcycle 15 left_mm -80
+	setcycle 15 mouse_loc 15
+	setcycle 15 right_mm 40
+	setcycle 16 left_mm -40
+	setcycle 16 mouse_loc 15
+	setcycle 16 right_mm 40
+	setcycle 17 left_mm -40
+	setcycle 17 mouse_loc 15
+	setcycle 17 right_mm 40
+	setcycle 18 left_mm -80
+	setcycle 18 mouse_loc 15
+	setcycle 18 right_mm 40
+	setcycle 19 left_mm -80
+	setcycle 19 mouse_loc 15
+	setcycle 19 right_mm 40
+	setcycle 20 left_mm -40
+	setcycle 20 mouse_loc 15
+	setcycle 20 right_mm 40
+	setcycle 21 left_mm -40
+	setcycle 21 mouse_loc 15
+	setcycle 21 right_mm 40
+	setcycle 22 left_mm -80
+	setcycle 22 mouse_loc 15
+	setcycle 22 right_mm 40
+	setcycle 23 left_mm -80
+	setcycle 23 mouse_loc 15
+	setcycle 23 right_mm 40
+	setcycle 24 left_mm -40
+	setcycle 24 mouse_loc 15
+	setcycle 24 right_mm 40
+	setcycle 25 left_mm -40
+	setcycle 25 mouse_loc 15
+	setcycle 25 right_mm 40
+	setcycle 26 left_mm -80
+	setcycle 26 mouse_loc 15
+	setcycle 26 right_mm 40
+	setcycle 27 left_mm -80
+	setcycle 27 mouse_loc 15
+	setcycle 27 right_mm 40
+	setcycle 28 left_mm -40
+	setcycle 28 mouse_loc 15
+	setcycle 28 right_mm 40
+	setcycle 29 left_mm -40
+	setcycle 29 mouse_loc 15
+	setcycle 29 right_mm 40
+	setcycle 30 left_mm -80
+	setcycle 30 mouse_loc 15
+	setcycle 30 right_mm 40
+	setcycle 31 left_mm -80
+	setcycle 31 mouse_loc 15
+	setcycle 31 right_mm 40
+	setcycle 32 left_mm -40
+	setcycle 32 mouse_loc -15
+	setcycle 32 right_mm 40
+	setcycle 33 left_mm -40
+	setcycle 33 mouse_loc -15
+	setcycle 33 right_mm 40
+	setcycle 34 left_mm -80
+	setcycle 34 mouse_loc -15
+	setcycle 34 right_mm 40
+	setcycle 35 left_mm -80
+	setcycle 35 mouse_loc -15
+	setcycle 35 right_mm 40
+	setcycle 36 left_mm -40
+	setcycle 36 mouse_loc -15
+	setcycle 36 right_mm 40
+	setcycle 37 left_mm -40
+	setcycle 37 mouse_loc -15
+	setcycle 37 right_mm 40
+	setcycle 38 left_mm -80
+	setcycle 38 mouse_loc -15
+	setcycle 38 right_mm 40
+	setcycle 39 left_mm -80
+	setcycle 39 mouse_loc -15
+	setcycle 39 right_mm 40
+	setcycle 40 left_mm -40
+	setcycle 40 mouse_loc -15
+	setcycle 40 right_mm 40
+	setcycle 41 left_mm -40
+	setcycle 41 mouse_loc -15
+	setcycle 41 right_mm 40
+	setcycle 42 left_mm -80
+	setcycle 42 mouse_loc -15
+	setcycle 42 right_mm 40
+	setcycle 43 left_mm -80
+	setcycle 43 mouse_loc -15
+	setcycle 43 right_mm 40
+	setcycle 44 left_mm -40
+	setcycle 44 mouse_loc -15
+	setcycle 44 right_mm 40
+	setcycle 45 left_mm -40
+	setcycle 45 mouse_loc -15
+	setcycle 45 right_mm 40
+	setcycle 46 left_mm -80
+	setcycle 46 mouse_loc -15
+	setcycle 46 right_mm 40
+	setcycle 47 left_mm -80
+	setcycle 47 mouse_loc -15
+	setcycle 47 right_mm 40
+	setcycle 48 left_mm -40
+	setcycle 48 mouse_loc -15
+	setcycle 48 right_mm 40
+	setcycle 49 left_mm -40
+	setcycle 49 mouse_loc -15
+	setcycle 49 right_mm 40
+	setcycle 50 left_mm -80
+	setcycle 50 mouse_loc -15
+	setcycle 50 right_mm 40
+	setcycle 51 left_mm -80
+	setcycle 51 mouse_loc -15
+	setcycle 51 right_mm 40
+	setcycle 52 left_mm -40
+	setcycle 52 mouse_loc -15
+	setcycle 52 right_mm 40
+	setcycle 53 left_mm -40
+	setcycle 53 mouse_loc -15
+	setcycle 53 right_mm 40
+	setcycle 54 left_mm -80
+	setcycle 54 mouse_loc -15
+	setcycle 54 right_mm 40
+	setcycle 55 left_mm -80
+	setcycle 55 mouse_loc -15
+	setcycle 55 right_mm 40
+	setcycle 56 left_mm -40
+	setcycle 56 mouse_loc -15
+	setcycle 56 right_mm 40
+	setcycle 57 left_mm -40
+	setcycle 57 mouse_loc -15
+	setcycle 57 right_mm 40
+	setcycle 58 left_mm -80
+	setcycle 58 mouse_loc -15
+	setcycle 58 right_mm 40
+	setcycle 59 left_mm -80
+	setcycle 59 mouse_loc -15
+	setcycle 59 right_mm 40
+	setcycle 60 left_mm -40
+	setcycle 60 mouse_loc -15
+	setcycle 60 right_mm 40
+	setcycle 61 left_mm -40
+	setcycle 61 mouse_loc -15
+	setcycle 61 right_mm 40
+	setcycle 62 left_mm -80
+	setcycle 62 mouse_loc -15
+	setcycle 62 right_mm 40
+	setcycle 63 left_mm -80
+	setcycle 63 mouse_loc -15
+	setcycle 63 right_mm 40
+	setcycle 64 left_mm -40
+	setcycle 64 mouse_loc 15
+	setcycle 64 right_mm 80
+	setcycle 65 left_mm -40
+	setcycle 65 mouse_loc 15
+	setcycle 65 right_mm 80
+	setcycle 66 left_mm -80
+	setcycle 66 mouse_loc 15
+	setcycle 66 right_mm 80
+	setcycle 67 left_mm -80
+	setcycle 67 mouse_loc 15
+	setcycle 67 right_mm 80
+	setcycle 68 left_mm -40
+	setcycle 68 mouse_loc 15
+	setcycle 68 right_mm 80
+	setcycle 69 left_mm -40
+	setcycle 69 mouse_loc 15
+	setcycle 69 right_mm 80
+	setcycle 70 left_mm -80
+	setcycle 70 mouse_loc 15
+	setcycle 70 right_mm 80
+	setcycle 71 left_mm -80
+	setcycle 71 mouse_loc 15
+	setcycle 71 right_mm 80
+	setcycle 72 left_mm -40
+	setcycle 72 mouse_loc 15
+	setcycle 72 right_mm 80
+	setcycle 73 left_mm -40
+	setcycle 73 mouse_loc 15
+	setcycle 73 right_mm 80
+	setcycle 74 left_mm -80
+	setcycle 74 mouse_loc 15
+	setcycle 74 right_mm 80
+	setcycle 75 left_mm -80
+	setcycle 75 mouse_loc 15
+	setcycle 75 right_mm 80
+	setcycle 76 left_mm -40
+	setcycle 76 mouse_loc 15
+	setcycle 76 right_mm 80
+	setcycle 77 left_mm -40
+	setcycle 77 mouse_loc 15
+	setcycle 77 right_mm 80
+	setcycle 78 left_mm -80
+	setcycle 78 mouse_loc 15
+	setcycle 78 right_mm 80
+	setcycle 79 left_mm -80
+	setcycle 79 mouse_loc 15
+	setcycle 79 right_mm 80
+	setcycle 80 left_mm -40
+	setcycle 80 mouse_loc 15
+	setcycle 80 right_mm 80
+	setcycle 81 left_mm -40
+	setcycle 81 mouse_loc 15
+	setcycle 81 right_mm 80
+	setcycle 82 left_mm -80
+	setcycle 82 mouse_loc 15
+	setcycle 82 right_mm 80
+	setcycle 83 left_mm -80
+	setcycle 83 mouse_loc 15
+	setcycle 83 right_mm 80
+	setcycle 84 left_mm -40
+	setcycle 84 mouse_loc 15
+	setcycle 84 right_mm 80
+	setcycle 85 left_mm -40
+	setcycle 85 mouse_loc 15
+	setcycle 85 right_mm 80
+	setcycle 86 left_mm -80
+	setcycle 86 mouse_loc 15
+	setcycle 86 right_mm 80
+	setcycle 87 left_mm -80
+	setcycle 87 mouse_loc 15
+	setcycle 87 right_mm 80
+	setcycle 88 left_mm -40
+	setcycle 88 mouse_loc 15
+	setcycle 88 right_mm 80
+	setcycle 89 left_mm -40
+	setcycle 89 mouse_loc 15
+	setcycle 89 right_mm 80
+	setcycle 90 left_mm -80
+	setcycle 90 mouse_loc 15
+	setcycle 90 right_mm 80
+	setcycle 91 left_mm -80
+	setcycle 91 mouse_loc 15
+	setcycle 91 right_mm 80
+	setcycle 92 left_mm -40
+	setcycle 92 mouse_loc 15
+	setcycle 92 right_mm 80
+	setcycle 93 left_mm -40
+	setcycle 93 mouse_loc 15
+	setcycle 93 right_mm 80
+	setcycle 94 left_mm -80
+	setcycle 94 mouse_loc 15
+	setcycle 94 right_mm 80
+	setcycle 95 left_mm -80
+	setcycle 95 mouse_loc 15
+	setcycle 95 right_mm 80
+	setcycle 96 left_mm -40
+	setcycle 96 mouse_loc -15
+	setcycle 96 right_mm 80
+	setcycle 97 left_mm -40
+	setcycle 97 mouse_loc -15
+	setcycle 97 right_mm 80
+	setcycle 98 left_mm -80
+	setcycle 98 mouse_loc -15
+	setcycle 98 right_mm 80
+	setcycle 99 left_mm -80
+	setcycle 99 mouse_loc -15
+	setcycle 99 right_mm 80
+	setcycle 100 left_mm -40
+	setcycle 100 mouse_loc -15
+	setcycle 100 right_mm 80
+	setcycle 101 left_mm -40
+	setcycle 101 mouse_loc -15
+	setcycle 101 right_mm 80
+	setcycle 102 left_mm -80
+	setcycle 102 mouse_loc -15
+	setcycle 102 right_mm 80
+	setcycle 103 left_mm -80
+	setcycle 103 mouse_loc -15
+	setcycle 103 right_mm 80
+	setcycle 104 left_mm -40
+	setcycle 104 mouse_loc -15
+	setcycle 104 right_mm 80
+	setcycle 105 left_mm -40
+	setcycle 105 mouse_loc -15
+	setcycle 105 right_mm 80
+	setcycle 106 left_mm -80
+	setcycle 106 mouse_loc -15
+	setcycle 106 right_mm 80
+	setcycle 107 left_mm -80
+	setcycle 107 mouse_loc -15
+	setcycle 107 right_mm 80
+	setcycle 108 left_mm -40
+	setcycle 108 mouse_loc -15
+	setcycle 108 right_mm 80
+	setcycle 109 left_mm -40
+	setcycle 109 mouse_loc -15
+	setcycle 109 right_mm 80
+	setcycle 110 left_mm -80
+	setcycle 110 mouse_loc -15
+	setcycle 110 right_mm 80
+	setcycle 111 left_mm -80
+	setcycle 111 mouse_loc -15
+	setcycle 111 right_mm 80
+	setcycle 112 left_mm -40
+	setcycle 112 mouse_loc -15
+	setcycle 112 right_mm 80
+	setcycle 113 left_mm -40
+	setcycle 113 mouse_loc -15
+	setcycle 113 right_mm 80
+	setcycle 114 left_mm -80
+	setcycle 114 mouse_loc -15
+	setcycle 114 right_mm 80
+	setcycle 115 left_mm -80
+	setcycle 115 mouse_loc -15
+	setcycle 115 right_mm 80
+	setcycle 116 left_mm -40
+	setcycle 116 mouse_loc -15
+	setcycle 116 right_mm 80
+	setcycle 117 left_mm -40
+	setcycle 117 mouse_loc -15
+	setcycle 117 right_mm 80
+	setcycle 118 left_mm -80
+	setcycle 118 mouse_loc -15
+	setcycle 118 right_mm 80
+	setcycle 119 left_mm -80
+	setcycle 119 mouse_loc -15
+	setcycle 119 right_mm 80
+	setcycle 120 left_mm -40
+	setcycle 120 mouse_loc -15
+	setcycle 120 right_mm 80
+	setcycle 121 left_mm -40
+	setcycle 121 mouse_loc -15
+	setcycle 121 right_mm 80
+	setcycle 122 left_mm -80
+	setcycle 122 mouse_loc -15
+	setcycle 122 right_mm 80
+	setcycle 123 left_mm -80
+	setcycle 123 mouse_loc -15
+	setcycle 123 right_mm 80
+	setcycle 124 left_mm -40
+	setcycle 124 mouse_loc -15
+	setcycle 124 right_mm 80
+	setcycle 125 left_mm -40
+	setcycle 125 mouse_loc -15
+	setcycle 125 right_mm 80
+	setcycle 126 left_mm -80
+	setcycle 126 mouse_loc -15
+	setcycle 126 right_mm 80
+	setcycle 127 left_mm -80
+	setcycle 127 mouse_loc -15
+	setcycle 127 right_mm 80
+	setcycle 128 left_mm -40
+	setcycle 128 mouse_loc 15
+	setcycle 128 right_mm 40
+	setcycle 129 left_mm -40
+	setcycle 129 mouse_loc 15
+	setcycle 129 right_mm 40
+	setcycle 130 left_mm -80
+	setcycle 130 mouse_loc 15
+	setcycle 130 right_mm 40
+	setcycle 131 left_mm -80
+	setcycle 131 mouse_loc 15
+	setcycle 131 right_mm 40
+	setcycle 132 left_mm -40
+	setcycle 132 mouse_loc 15
+	setcycle 132 right_mm 40
+	setcycle 133 left_mm -40
+	setcycle 133 mouse_loc 15
+	setcycle 133 right_mm 40
+	setcycle 134 left_mm -80
+	setcycle 134 mouse_loc 15
+	setcycle 134 right_mm 40
+	setcycle 135 left_mm -80
+	setcycle 135 mouse_loc 15
+	setcycle 135 right_mm 40
+	setcycle 136 left_mm -40
+	setcycle 136 mouse_loc 15
+	setcycle 136 right_mm 40
+	setcycle 137 left_mm -40
+	setcycle 137 mouse_loc 15
+	setcycle 137 right_mm 40
+	setcycle 138 left_mm -80
+	setcycle 138 mouse_loc 15
+	setcycle 138 right_mm 40
+	setcycle 139 left_mm -80
+	setcycle 139 mouse_loc 15
+	setcycle 139 right_mm 40
+	setcycle 140 left_mm -40
+	setcycle 140 mouse_loc 15
+	setcycle 140 right_mm 40
+	setcycle 141 left_mm -40
+	setcycle 141 mouse_loc 15
+	setcycle 141 right_mm 40
+	setcycle 142 left_mm -80
+	setcycle 142 mouse_loc 15
+	setcycle 142 right_mm 40
+	setcycle 143 left_mm -80
+	setcycle 143 mouse_loc 15
+	setcycle 143 right_mm 40
+	setcycle 144 left_mm -40
+	setcycle 144 mouse_loc 15
+	setcycle 144 right_mm 40
+	setcycle 145 left_mm -40
+	setcycle 145 mouse_loc 15
+	setcycle 145 right_mm 40
+	setcycle 146 left_mm -80
+	setcycle 146 mouse_loc 15
+	setcycle 146 right_mm 40
+	setcycle 147 left_mm -80
+	setcycle 147 mouse_loc 15
+	setcycle 147 right_mm 40
+	setcycle 148 left_mm -40
+	setcycle 148 mouse_loc 15
+	setcycle 148 right_mm 40
+	setcycle 149 left_mm -40
+	setcycle 149 mouse_loc 15
+	setcycle 149 right_mm 40
+	setcycle 150 left_mm -80
+	setcycle 150 mouse_loc 15
+	setcycle 150 right_mm 40
+	setcycle 151 left_mm -80
+	setcycle 151 mouse_loc 15
+	setcycle 151 right_mm 40
+	setcycle 152 left_mm -40
+	setcycle 152 mouse_loc 15
+	setcycle 152 right_mm 40
+	setcycle 153 left_mm -40
+	setcycle 153 mouse_loc 15
+	setcycle 153 right_mm 40
+	setcycle 154 left_mm -80
+	setcycle 154 mouse_loc 15
+	setcycle 154 right_mm 40
+	setcycle 155 left_mm -80
+	setcycle 155 mouse_loc 15
+	setcycle 155 right_mm 40
+	setcycle 156 left_mm -40
+	setcycle 156 mouse_loc 15
+	setcycle 156 right_mm 40
+	setcycle 157 left_mm -40
+	setcycle 157 mouse_loc 15
+	setcycle 157 right_mm 40
+	setcycle 158 left_mm -80
+	setcycle 158 mouse_loc 15
+	setcycle 158 right_mm 40
+	setcycle 159 left_mm -80
+	setcycle 159 mouse_loc 15
+	setcycle 159 right_mm 40
+	setcycle 160 left_mm -40
+	setcycle 160 mouse_loc -15
+	setcycle 160 right_mm 40
+	setcycle 161 left_mm -40
+	setcycle 161 mouse_loc -15
+	setcycle 161 right_mm 40
+	setcycle 162 left_mm -80
+	setcycle 162 mouse_loc -15
+	setcycle 162 right_mm 40
+	setcycle 163 left_mm -80
+	setcycle 163 mouse_loc -15
+	setcycle 163 right_mm 40
+	setcycle 164 left_mm -40
+	setcycle 164 mouse_loc -15
+	setcycle 164 right_mm 40
+	setcycle 165 left_mm -40
+	setcycle 165 mouse_loc -15
+	setcycle 165 right_mm 40
+	setcycle 166 left_mm -80
+	setcycle 166 mouse_loc -15
+	setcycle 166 right_mm 40
+	setcycle 167 left_mm -80
+	setcycle 167 mouse_loc -15
+	setcycle 167 right_mm 40
+	setcycle 168 left_mm -40
+	setcycle 168 mouse_loc -15
+	setcycle 168 right_mm 40
+	setcycle 169 left_mm -40
+	setcycle 169 mouse_loc -15
+	setcycle 169 right_mm 40
+	setcycle 170 left_mm -80
+	setcycle 170 mouse_loc -15
+	setcycle 170 right_mm 40
+	setcycle 171 left_mm -80
+	setcycle 171 mouse_loc -15
+	setcycle 171 right_mm 40
+	setcycle 172 left_mm -40
+	setcycle 172 mouse_loc -15
+	setcycle 172 right_mm 40
+	setcycle 173 left_mm -40
+	setcycle 173 mouse_loc -15
+	setcycle 173 right_mm 40
+	setcycle 174 left_mm -80
+	setcycle 174 mouse_loc -15
+	setcycle 174 right_mm 40
+	setcycle 175 left_mm -80
+	setcycle 175 mouse_loc -15
+	setcycle 175 right_mm 40
+	setcycle 176 left_mm -40
+	setcycle 176 mouse_loc -15
+	setcycle 176 right_mm 40
+	setcycle 177 left_mm -40
+	setcycle 177 mouse_loc -15
+	setcycle 177 right_mm 40
+	setcycle 178 left_mm -80
+	setcycle 178 mouse_loc -15
+	setcycle 178 right_mm 40
+	setcycle 179 left_mm -80
+	setcycle 179 mouse_loc -15
+	setcycle 179 right_mm 40
+	setcycle 180 left_mm -40
+	setcycle 180 mouse_loc -15
+	setcycle 180 right_mm 40
+	setcycle 181 left_mm -40
+	setcycle 181 mouse_loc -15
+	setcycle 181 right_mm 40
+	setcycle 182 left_mm -80
+	setcycle 182 mouse_loc -15
+	setcycle 182 right_mm 40
+	setcycle 183 left_mm -80
+	setcycle 183 mouse_loc -15
+	setcycle 183 right_mm 40
+	setcycle 184 left_mm -40
+	setcycle 184 mouse_loc -15
+	setcycle 184 right_mm 40
+	setcycle 185 left_mm -40
+	setcycle 185 mouse_loc -15
+	setcycle 185 right_mm 40
+	setcycle 186 left_mm -80
+	setcycle 186 mouse_loc -15
+	setcycle 186 right_mm 40
+	setcycle 187 left_mm -80
+	setcycle 187 mouse_loc -15
+	setcycle 187 right_mm 40
+	setcycle 188 left_mm -40
+	setcycle 188 mouse_loc -15
+	setcycle 188 right_mm 40
+	setcycle 189 left_mm -40
+	setcycle 189 mouse_loc -15
+	setcycle 189 right_mm 40
+	setcycle 190 left_mm -80
+	setcycle 190 mouse_loc -15
+	setcycle 190 right_mm 40
+	setcycle 191 left_mm -80
+	setcycle 191 mouse_loc -15
+	setcycle 191 right_mm 40
+	setcycle 192 left_mm -40
+	setcycle 192 mouse_loc 15
+	setcycle 192 right_mm 80
+	setcycle 193 left_mm -40
+	setcycle 193 mouse_loc 15
+	setcycle 193 right_mm 80
+	setcycle 194 left_mm -80
+	setcycle 194 mouse_loc 15
+	setcycle 194 right_mm 80
+	setcycle 195 left_mm -80
+	setcycle 195 mouse_loc 15
+	setcycle 195 right_mm 80
+	setcycle 196 left_mm -40
+	setcycle 196 mouse_loc 15
+	setcycle 196 right_mm 80
+	setcycle 197 left_mm -40
+	setcycle 197 mouse_loc 15
+	setcycle 197 right_mm 80
+	setcycle 198 left_mm -80
+	setcycle 198 mouse_loc 15
+	setcycle 198 right_mm 80
+	setcycle 199 left_mm -80
+	setcycle 199 mouse_loc 15
+	setcycle 199 right_mm 80
+	setcycle 200 left_mm -40
+	setcycle 200 mouse_loc 15
+	setcycle 200 right_mm 80
+	setcycle 201 left_mm -40
+	setcycle 201 mouse_loc 15
+	setcycle 201 right_mm 80
+	setcycle 202 left_mm -80
+	setcycle 202 mouse_loc 15
+	setcycle 202 right_mm 80
+	setcycle 203 left_mm -80
+	setcycle 203 mouse_loc 15
+	setcycle 203 right_mm 80
+	setcycle 204 left_mm -40
+	setcycle 204 mouse_loc 15
+	setcycle 204 right_mm 80
+	setcycle 205 left_mm -40
+	setcycle 205 mouse_loc 15
+	setcycle 205 right_mm 80
+	setcycle 206 left_mm -80
+	setcycle 206 mouse_loc 15
+	setcycle 206 right_mm 80
+	setcycle 207 left_mm -80
+	setcycle 207 mouse_loc 15
+	setcycle 207 right_mm 80
+	setcycle 208 left_mm -40
+	setcycle 208 mouse_loc 15
+	setcycle 208 right_mm 80
+	setcycle 209 left_mm -40
+	setcycle 209 mouse_loc 15
+	setcycle 209 right_mm 80
+	setcycle 210 left_mm -80
+	setcycle 210 mouse_loc 15
+	setcycle 210 right_mm 80
+	setcycle 211 left_mm -80
+	setcycle 211 mouse_loc 15
+	setcycle 211 right_mm 80
+	setcycle 212 left_mm -40
+	setcycle 212 mouse_loc 15
+	setcycle 212 right_mm 80
+	setcycle 213 left_mm -40
+	setcycle 213 mouse_loc 15
+	setcycle 213 right_mm 80
+	setcycle 214 left_mm -80
+	setcycle 214 mouse_loc 15
+	setcycle 214 right_mm 80
+	setcycle 215 left_mm -80
+	setcycle 215 mouse_loc 15
+	setcycle 215 right_mm 80
+	setcycle 216 left_mm -40
+	setcycle 216 mouse_loc 15
+	setcycle 216 right_mm 80
+	setcycle 217 left_mm -40
+	setcycle 217 mouse_loc 15
+	setcycle 217 right_mm 80
+	setcycle 218 left_mm -80
+	setcycle 218 mouse_loc 15
+	setcycle 218 right_mm 80
+	setcycle 219 left_mm -80
+	setcycle 219 mouse_loc 15
+	setcycle 219 right_mm 80
+	setcycle 220 left_mm -40
+	setcycle 220 mouse_loc 15
+	setcycle 220 right_mm 80
+	setcycle 221 left_mm -40
+	setcycle 221 mouse_loc 15
+	setcycle 221 right_mm 80
+	setcycle 222 left_mm -80
+	setcycle 222 mouse_loc 15
+	setcycle 222 right_mm 80
+	setcycle 223 left_mm -80
+	setcycle 223 mouse_loc 15
+	setcycle 223 right_mm 80
+	setcycle 224 left_mm -40
+	setcycle 224 mouse_loc -15
+	setcycle 224 right_mm 80
+	setcycle 225 left_mm -40
+	setcycle 225 mouse_loc -15
+	setcycle 225 right_mm 80
+	setcycle 226 left_mm -80
+	setcycle 226 mouse_loc -15
+	setcycle 226 right_mm 80
+	setcycle 227 left_mm -80
+	setcycle 227 mouse_loc -15
+	setcycle 227 right_mm 80
+	setcycle 228 left_mm -40
+	setcycle 228 mouse_loc -15
+	setcycle 228 right_mm 80
+	setcycle 229 left_mm -40
+	setcycle 229 mouse_loc -15
+	setcycle 229 right_mm 80
+	setcycle 230 left_mm -80
+	setcycle 230 mouse_loc -15
+	setcycle 230 right_mm 80
+	setcycle 231 left_mm -80
+	setcycle 231 mouse_loc -15
+	setcycle 231 right_mm 80
+	setcycle 232 left_mm -40
+	setcycle 232 mouse_loc -15
+	setcycle 232 right_mm 80
+	setcycle 233 left_mm -40
+	setcycle 233 mouse_loc -15
+	setcycle 233 right_mm 80
+	setcycle 234 left_mm -80
+	setcycle 234 mouse_loc -15
+	setcycle 234 right_mm 80
+	setcycle 235 left_mm -80
+	setcycle 235 mouse_loc -15
+	setcycle 235 right_mm 80
+	setcycle 236 left_mm -40
+	setcycle 236 mouse_loc -15
+	setcycle 236 right_mm 80
+	setcycle 237 left_mm -40
+	setcycle 237 mouse_loc -15
+	setcycle 237 right_mm 80
+	setcycle 238 left_mm -80
+	setcycle 238 mouse_loc -15
+	setcycle 238 right_mm 80
+	setcycle 239 left_mm -80
+	setcycle 239 mouse_loc -15
+	setcycle 239 right_mm 80
+	setcycle 240 left_mm -40
+	setcycle 240 mouse_loc -15
+	setcycle 240 right_mm 80
+	setcycle 241 left_mm -40
+	setcycle 241 mouse_loc -15
+	setcycle 241 right_mm 80
+	setcycle 242 left_mm -80
+	setcycle 242 mouse_loc -15
+	setcycle 242 right_mm 80
+	setcycle 243 left_mm -80
+	setcycle 243 mouse_loc -15
+	setcycle 243 right_mm 80
+	setcycle 244 left_mm -40
+	setcycle 244 mouse_loc -15
+	setcycle 244 right_mm 80
+	setcycle 245 left_mm -40
+	setcycle 245 mouse_loc -15
+	setcycle 245 right_mm 80
+	setcycle 246 left_mm -80
+	setcycle 246 mouse_loc -15
+	setcycle 246 right_mm 80
+	setcycle 247 left_mm -80
+	setcycle 247 mouse_loc -15
+	setcycle 247 right_mm 80
+	setcycle 248 left_mm -40
+	setcycle 248 mouse_loc -15
+	setcycle 248 right_mm 80
+	setcycle 249 left_mm -40
+	setcycle 249 mouse_loc -15
+	setcycle 249 right_mm 80
+	setcycle 250 left_mm -80
+	setcycle 250 mouse_loc -15
+	setcycle 250 right_mm 80
+	setcycle 251 left_mm -80
+	setcycle 251 mouse_loc -15
+	setcycle 251 right_mm 80
+	setcycle 252 left_mm -40
+	setcycle 252 mouse_loc -15
+	setcycle 252 right_mm 80
+	setcycle 253 left_mm -40
+	setcycle 253 mouse_loc -15
+	setcycle 253 right_mm 80
+	setcycle 254 left_mm -80
+	setcycle 254 mouse_loc -15
+	setcycle 254 right_mm 80
+	setcycle 255 left_mm -80
+	setcycle 255 mouse_loc -15
+	setcycle 255 right_mm 80
+	setcycle 256 left_mm -40
+	setcycle 256 mouse_loc 15
+	setcycle 256 right_mm 40
+	setcycle 257 left_mm -40
+	setcycle 257 mouse_loc 15
+	setcycle 257 right_mm 40
+	setcycle 258 left_mm -80
+	setcycle 258 mouse_loc 15
+	setcycle 258 right_mm 40
+	setcycle 259 left_mm -80
+	setcycle 259 mouse_loc 15
+	setcycle 259 right_mm 40
+	setcycle 260 left_mm -40
+	setcycle 260 mouse_loc 15
+	setcycle 260 right_mm 40
+	setcycle 261 left_mm -40
+	setcycle 261 mouse_loc 15
+	setcycle 261 right_mm 40
+	setcycle 262 left_mm -80
+	setcycle 262 mouse_loc 15
+	setcycle 262 right_mm 40
+	setcycle 263 left_mm -80
+	setcycle 263 mouse_loc 15
+	setcycle 263 right_mm 40
+	setcycle 264 left_mm -40
+	setcycle 264 mouse_loc 15
+	setcycle 264 right_mm 40
+	setcycle 265 left_mm -40
+	setcycle 265 mouse_loc 15
+	setcycle 265 right_mm 40
+	setcycle 266 left_mm -80
+	setcycle 266 mouse_loc 15
+	setcycle 266 right_mm 40
+	setcycle 267 left_mm -80
+	setcycle 267 mouse_loc 15
+	setcycle 267 right_mm 40
+	setcycle 268 left_mm -40
+	setcycle 268 mouse_loc 15
+	setcycle 268 right_mm 40
+	setcycle 269 left_mm -40
+	setcycle 269 mouse_loc 15
+	setcycle 269 right_mm 40
+	setcycle 270 left_mm -80
+	setcycle 270 mouse_loc 15
+	setcycle 270 right_mm 40
+	setcycle 271 left_mm -80
+	setcycle 271 mouse_loc 15
+	setcycle 271 right_mm 40
+	setcycle 272 left_mm -40
+	setcycle 272 mouse_loc 15
+	setcycle 272 right_mm 40
+	setcycle 273 left_mm -40
+	setcycle 273 mouse_loc 15
+	setcycle 273 right_mm 40
+	setcycle 274 left_mm -80
+	setcycle 274 mouse_loc 15
+	setcycle 274 right_mm 40
+	setcycle 275 left_mm -80
+	setcycle 275 mouse_loc 15
+	setcycle 275 right_mm 40
+	setcycle 276 left_mm -40
+	setcycle 276 mouse_loc 15
+	setcycle 276 right_mm 40
+	setcycle 277 left_mm -40
+	setcycle 277 mouse_loc 15
+	setcycle 277 right_mm 40
+	setcycle 278 left_mm -80
+	setcycle 278 mouse_loc 15
+	setcycle 278 right_mm 40
+	setcycle 279 left_mm -80
+	setcycle 279 mouse_loc 15
+	setcycle 279 right_mm 40
+	setcycle 280 left_mm -40
+	setcycle 280 mouse_loc 15
+	setcycle 280 right_mm 40
+	setcycle 281 left_mm -40
+	setcycle 281 mouse_loc 15
+	setcycle 281 right_mm 40
+	setcycle 282 left_mm -80
+	setcycle 282 mouse_loc 15
+	setcycle 282 right_mm 40
+	setcycle 283 left_mm -80
+	setcycle 283 mouse_loc 15
+	setcycle 283 right_mm 40
+	setcycle 284 left_mm -40
+	setcycle 284 mouse_loc 15
+	setcycle 284 right_mm 40
+	setcycle 285 left_mm -40
+	setcycle 285 mouse_loc 15
+	setcycle 285 right_mm 40
+	setcycle 286 left_mm -80
+	setcycle 286 mouse_loc 15
+	setcycle 286 right_mm 40
+	setcycle 287 left_mm -80
+	setcycle 287 mouse_loc 15
+	setcycle 287 right_mm 40
+	setcycle 288 left_mm -40
+	setcycle 288 mouse_loc -15
+	setcycle 288 right_mm 40
+	setcycle 289 left_mm -40
+	setcycle 289 mouse_loc -15
+	setcycle 289 right_mm 40
+	setcycle 290 left_mm -80
+	setcycle 290 mouse_loc -15
+	setcycle 290 right_mm 40
+	setcycle 291 left_mm -80
+	setcycle 291 mouse_loc -15
+	setcycle 291 right_mm 40
+	setcycle 292 left_mm -40
+	setcycle 292 mouse_loc -15
+	setcycle 292 right_mm 40
+	setcycle 293 left_mm -40
+	setcycle 293 mouse_loc -15
+	setcycle 293 right_mm 40
+	setcycle 294 left_mm -80
+	setcycle 294 mouse_loc -15
+	setcycle 294 right_mm 40
+	setcycle 295 left_mm -80
+	setcycle 295 mouse_loc -15
+	setcycle 295 right_mm 40
+	setcycle 296 left_mm -40
+	setcycle 296 mouse_loc -15
+	setcycle 296 right_mm 40
+	setcycle 297 left_mm -40
+	setcycle 297 mouse_loc -15
+	setcycle 297 right_mm 40
+	setcycle 298 left_mm -80
+	setcycle 298 mouse_loc -15
+	setcycle 298 right_mm 40
+	setcycle 299 left_mm -80
+	setcycle 299 mouse_loc -15
+	setcycle 299 right_mm 40
+	setcycle 300 left_mm -40
+	setcycle 300 mouse_loc -15
+	setcycle 300 right_mm 40
+	setcycle 301 left_mm -40
+	setcycle 301 mouse_loc -15
+	setcycle 301 right_mm 40
+	setcycle 302 left_mm -80
+	setcycle 302 mouse_loc -15
+	setcycle 302 right_mm 40
+	setcycle 303 left_mm -80
+	setcycle 303 mouse_loc -15
+	setcycle 303 right_mm 40
+	setcycle 304 left_mm -40
+	setcycle 304 mouse_loc -15
+	setcycle 304 right_mm 40
+	setcycle 305 left_mm -40
+	setcycle 305 mouse_loc -15
+	setcycle 305 right_mm 40
+	setcycle 306 left_mm -80
+	setcycle 306 mouse_loc -15
+	setcycle 306 right_mm 40
+	setcycle 307 left_mm -80
+	setcycle 307 mouse_loc -15
+	setcycle 307 right_mm 40
+	setcycle 308 left_mm -40
+	setcycle 308 mouse_loc -15
+	setcycle 308 right_mm 40
+	setcycle 309 left_mm -40
+	setcycle 309 mouse_loc -15
+	setcycle 309 right_mm 40
+	setcycle 310 left_mm -80
+	setcycle 310 mouse_loc -15
+	setcycle 310 right_mm 40
+	setcycle 311 left_mm -80
+	setcycle 311 mouse_loc -15
+	setcycle 311 right_mm 40
+	setcycle 312 left_mm -40
+	setcycle 312 mouse_loc -15
+	setcycle 312 right_mm 40
+	setcycle 313 left_mm -40
+	setcycle 313 mouse_loc -15
+	setcycle 313 right_mm 40
+	setcycle 314 left_mm -80
+	setcycle 314 mouse_loc -15
+	setcycle 314 right_mm 40
+	setcycle 315 left_mm -80
+	setcycle 315 mouse_loc -15
+	setcycle 315 right_mm 40
+	setcycle 316 left_mm -40
+	setcycle 316 mouse_loc -15
+	setcycle 316 right_mm 40
+	setcycle 317 left_mm -40
+	setcycle 317 mouse_loc -15
+	setcycle 317 right_mm 40
+	setcycle 318 left_mm -80
+	setcycle 318 mouse_loc -15
+	setcycle 318 right_mm 40
+	setcycle 319 left_mm -80
+	setcycle 319 mouse_loc -15
+	setcycle 319 right_mm 40
+	setcycle 320 left_mm -40
+	setcycle 320 mouse_loc 15
+	setcycle 320 right_mm 80
+	setcycle 321 left_mm -40
+	setcycle 321 mouse_loc 15
+	setcycle 321 right_mm 80
+	setcycle 322 left_mm -80
+	setcycle 322 mouse_loc 15
+	setcycle 322 right_mm 80
+	setcycle 323 left_mm -80
+	setcycle 323 mouse_loc 15
+	setcycle 323 right_mm 80
+	setcycle 324 left_mm -40
+	setcycle 324 mouse_loc 15
+	setcycle 324 right_mm 80
+	setcycle 325 left_mm -40
+	setcycle 325 mouse_loc 15
+	setcycle 325 right_mm 80
+	setcycle 326 left_mm -80
+	setcycle 326 mouse_loc 15
+	setcycle 326 right_mm 80
+	setcycle 327 left_mm -80
+	setcycle 327 mouse_loc 15
+	setcycle 327 right_mm 80
+	setcycle 328 left_mm -40
+	setcycle 328 mouse_loc 15
+	setcycle 328 right_mm 80
+	setcycle 329 left_mm -40
+	setcycle 329 mouse_loc 15
+	setcycle 329 right_mm 80
+	setcycle 330 left_mm -80
+	setcycle 330 mouse_loc 15
+	setcycle 330 right_mm 80
+	setcycle 331 left_mm -80
+	setcycle 331 mouse_loc 15
+	setcycle 331 right_mm 80
+	setcycle 332 left_mm -40
+	setcycle 332 mouse_loc 15
+	setcycle 332 right_mm 80
+	setcycle 333 left_mm -40
+	setcycle 333 mouse_loc 15
+	setcycle 333 right_mm 80
+	setcycle 334 left_mm -80
+	setcycle 334 mouse_loc 15
+	setcycle 334 right_mm 80
+	setcycle 335 left_mm -80
+	setcycle 335 mouse_loc 15
+	setcycle 335 right_mm 80
+	setcycle 336 left_mm -40
+	setcycle 336 mouse_loc 15
+	setcycle 336 right_mm 80
+	setcycle 337 left_mm -40
+	setcycle 337 mouse_loc 15
+	setcycle 337 right_mm 80
+	setcycle 338 left_mm -80
+	setcycle 338 mouse_loc 15
+	setcycle 338 right_mm 80
+	setcycle 339 left_mm -80
+	setcycle 339 mouse_loc 15
+	setcycle 339 right_mm 80
+	setcycle 340 left_mm -40
+	setcycle 340 mouse_loc 15
+	setcycle 340 right_mm 80
+	setcycle 341 left_mm -40
+	setcycle 341 mouse_loc 15
+	setcycle 341 right_mm 80
+	setcycle 342 left_mm -80
+	setcycle 342 mouse_loc 15
+	setcycle 342 right_mm 80
+	setcycle 343 left_mm -80
+	setcycle 343 mouse_loc 15
+	setcycle 343 right_mm 80
+	setcycle 344 left_mm -40
+	setcycle 344 mouse_loc 15
+	setcycle 344 right_mm 80
+	setcycle 345 left_mm -40
+	setcycle 345 mouse_loc 15
+	setcycle 345 right_mm 80
+	setcycle 346 left_mm -80
+	setcycle 346 mouse_loc 15
+	setcycle 346 right_mm 80
+	setcycle 347 left_mm -80
+	setcycle 347 mouse_loc 15
+	setcycle 347 right_mm 80
+	setcycle 348 left_mm -40
+	setcycle 348 mouse_loc 15
+	setcycle 348 right_mm 80
+	setcycle 349 left_mm -40
+	setcycle 349 mouse_loc 15
+	setcycle 349 right_mm 80
+	setcycle 350 left_mm -80
+	setcycle 350 mouse_loc 15
+	setcycle 350 right_mm 80
+	setcycle 351 left_mm -80
+	setcycle 351 mouse_loc 15
+	setcycle 351 right_mm 80
+	setcycle 352 left_mm -40
+	setcycle 352 mouse_loc -15
+	setcycle 352 right_mm 80
+	setcycle 353 left_mm -40
+	setcycle 353 mouse_loc -15
+	setcycle 353 right_mm 80
+	setcycle 354 left_mm -80
+	setcycle 354 mouse_loc -15
+	setcycle 354 right_mm 80
+	setcycle 355 left_mm -80
+	setcycle 355 mouse_loc -15
+	setcycle 355 right_mm 80
+	setcycle 356 left_mm -40
+	setcycle 356 mouse_loc -15
+	setcycle 356 right_mm 80
+	setcycle 357 left_mm -40
+	setcycle 357 mouse_loc -15
+	setcycle 357 right_mm 80
+	setcycle 358 left_mm -80
+	setcycle 358 mouse_loc -15
+	setcycle 358 right_mm 80
+	setcycle 359 left_mm -80
+	setcycle 359 mouse_loc -15
+	setcycle 359 right_mm 80
+	setcycle 360 left_mm -40
+	setcycle 360 mouse_loc -15
+	setcycle 360 right_mm 80
+	setcycle 361 left_mm -40
+	setcycle 361 mouse_loc -15
+	setcycle 361 right_mm 80
+	setcycle 362 left_mm -80
+	setcycle 362 mouse_loc -15
+	setcycle 362 right_mm 80
+	setcycle 363 left_mm -80
+	setcycle 363 mouse_loc -15
+	setcycle 363 right_mm 80
+	setcycle 364 left_mm -40
+	setcycle 364 mouse_loc -15
+	setcycle 364 right_mm 80
+	setcycle 365 left_mm -40
+	setcycle 365 mouse_loc -15
+	setcycle 365 right_mm 80
+	setcycle 366 left_mm -80
+	setcycle 366 mouse_loc -15
+	setcycle 366 right_mm 80
+	setcycle 367 left_mm -80
+	setcycle 367 mouse_loc -15
+	setcycle 367 right_mm 80
+	setcycle 368 left_mm -40
+	setcycle 368 mouse_loc -15
+	setcycle 368 right_mm 80
+	setcycle 369 left_mm -40
+	setcycle 369 mouse_loc -15
+	setcycle 369 right_mm 80
+	setcycle 370 left_mm -80
+	setcycle 370 mouse_loc -15
+	setcycle 370 right_mm 80
+	setcycle 371 left_mm -80
+	setcycle 371 mouse_loc -15
+	setcycle 371 right_mm 80
+	setcycle 372 left_mm -40
+	setcycle 372 mouse_loc -15
+	setcycle 372 right_mm 80
+	setcycle 373 left_mm -40
+	setcycle 373 mouse_loc -15
+	setcycle 373 right_mm 80
+	setcycle 374 left_mm -80
+	setcycle 374 mouse_loc -15
+	setcycle 374 right_mm 80
+	setcycle 375 left_mm -80
+	setcycle 375 mouse_loc -15
+	setcycle 375 right_mm 80
+	setcycle 376 left_mm -40
+	setcycle 376 mouse_loc -15
+	setcycle 376 right_mm 80
+	setcycle 377 left_mm -40
+	setcycle 377 mouse_loc -15
+	setcycle 377 right_mm 80
+	setcycle 378 left_mm -80
+	setcycle 378 mouse_loc -15
+	setcycle 378 right_mm 80
+	setcycle 379 left_mm -80
+	setcycle 379 mouse_loc -15
+	setcycle 379 right_mm 80
+	setcycle 380 left_mm -40
+	setcycle 380 mouse_loc -15
+	setcycle 380 right_mm 80
+	setcycle 381 left_mm -40
+	setcycle 381 mouse_loc -15
+	setcycle 381 right_mm 80
+	setcycle 382 left_mm -80
+	setcycle 382 mouse_loc -15
+	setcycle 382 right_mm 80
+	setcycle 383 left_mm -80
+	setcycle 383 mouse_loc -15
+	setcycle 383 right_mm 80
+	setcycle 384 left_mm -40
+	setcycle 384 mouse_loc 15
+	setcycle 384 right_mm 40
+	setcycle 385 left_mm -40
+	setcycle 385 mouse_loc 15
+	setcycle 385 right_mm 40
+	setcycle 386 left_mm -80
+	setcycle 386 mouse_loc 15
+	setcycle 386 right_mm 40
+	setcycle 387 left_mm -80
+	setcycle 387 mouse_loc 15
+	setcycle 387 right_mm 40
+	setcycle 388 left_mm -40
+	setcycle 388 mouse_loc 15
+	setcycle 388 right_mm 40
+	setcycle 389 left_mm -40
+	setcycle 389 mouse_loc 15
+	setcycle 389 right_mm 40
+	setcycle 390 left_mm -80
+	setcycle 390 mouse_loc 15
+	setcycle 390 right_mm 40
+	setcycle 391 left_mm -80
+	setcycle 391 mouse_loc 15
+	setcycle 391 right_mm 40
+	setcycle 392 left_mm -40
+	setcycle 392 mouse_loc 15
+	setcycle 392 right_mm 40
+	setcycle 393 left_mm -40
+	setcycle 393 mouse_loc 15
+	setcycle 393 right_mm 40
+	setcycle 394 left_mm -80
+	setcycle 394 mouse_loc 15
+	setcycle 394 right_mm 40
+	setcycle 395 left_mm -80
+	setcycle 395 mouse_loc 15
+	setcycle 395 right_mm 40
+	setcycle 396 left_mm -40
+	setcycle 396 mouse_loc 15
+	setcycle 396 right_mm 40
+	setcycle 397 left_mm -40
+	setcycle 397 mouse_loc 15
+	setcycle 397 right_mm 40
+	setcycle 398 left_mm -80
+	setcycle 398 mouse_loc 15
+	setcycle 398 right_mm 40
+	setcycle 399 left_mm -80
+	setcycle 399 mouse_loc 15
+	setcycle 399 right_mm 40
+	setcycle 400 left_mm -40
+	setcycle 400 mouse_loc 15
+	setcycle 400 right_mm 40
+	setcycle 401 left_mm -40
+	setcycle 401 mouse_loc 15
+	setcycle 401 right_mm 40
+	setcycle 402 left_mm -80
+	setcycle 402 mouse_loc 15
+	setcycle 402 right_mm 40
+	setcycle 403 left_mm -80
+	setcycle 403 mouse_loc 15
+	setcycle 403 right_mm 40
+	setcycle 404 left_mm -40
+	setcycle 404 mouse_loc 15
+	setcycle 404 right_mm 40
+	setcycle 405 left_mm -40
+	setcycle 405 mouse_loc 15
+	setcycle 405 right_mm 40
+	setcycle 406 left_mm -80
+	setcycle 406 mouse_loc 15
+	setcycle 406 right_mm 40
+	setcycle 407 left_mm -80
+	setcycle 407 mouse_loc 15
+	setcycle 407 right_mm 40
+	setcycle 408 left_mm -40
+	setcycle 408 mouse_loc 15
+	setcycle 408 right_mm 40
+	setcycle 409 left_mm -40
+	setcycle 409 mouse_loc 15
+	setcycle 409 right_mm 40
+	setcycle 410 left_mm -80
+	setcycle 410 mouse_loc 15
+	setcycle 410 right_mm 40
+	setcycle 411 left_mm -80
+	setcycle 411 mouse_loc 15
+	setcycle 411 right_mm 40
+	setcycle 412 left_mm -40
+	setcycle 412 mouse_loc 15
+	setcycle 412 right_mm 40
+	setcycle 413 left_mm -40
+	setcycle 413 mouse_loc 15
+	setcycle 413 right_mm 40
+	setcycle 414 left_mm -80
+	setcycle 414 mouse_loc 15
+	setcycle 414 right_mm 40
+	setcycle 415 left_mm -80
+	setcycle 415 mouse_loc 15
+	setcycle 415 right_mm 40
+	setcycle 416 left_mm -40
+	setcycle 416 mouse_loc -15
+	setcycle 416 right_mm 40
+	setcycle 417 left_mm -40
+	setcycle 417 mouse_loc -15
+	setcycle 417 right_mm 40
+	setcycle 418 left_mm -80
+	setcycle 418 mouse_loc -15
+	setcycle 418 right_mm 40
+	setcycle 419 left_mm -80
+	setcycle 419 mouse_loc -15
+	setcycle 419 right_mm 40
+	setcycle 420 left_mm -40
+	setcycle 420 mouse_loc -15
+	setcycle 420 right_mm 40
+	setcycle 421 left_mm -40
+	setcycle 421 mouse_loc -15
+	setcycle 421 right_mm 40
+	setcycle 422 left_mm -80
+	setcycle 422 mouse_loc -15
+	setcycle 422 right_mm 40
+	setcycle 423 left_mm -80
+	setcycle 423 mouse_loc -15
+	setcycle 423 right_mm 40
+	setcycle 424 left_mm -40
+	setcycle 424 mouse_loc -15
+	setcycle 424 right_mm 40
+	setcycle 425 left_mm -40
+	setcycle 425 mouse_loc -15
+	setcycle 425 right_mm 40
+	setcycle 426 left_mm -80
+	setcycle 426 mouse_loc -15
+	setcycle 426 right_mm 40
+	setcycle 427 left_mm -80
+	setcycle 427 mouse_loc -15
+	setcycle 427 right_mm 40
+	setcycle 428 left_mm -40
+	setcycle 428 mouse_loc -15
+	setcycle 428 right_mm 40
+	setcycle 429 left_mm -40
+	setcycle 429 mouse_loc -15
+	setcycle 429 right_mm 40
+	setcycle 430 left_mm -80
+	setcycle 430 mouse_loc -15
+	setcycle 430 right_mm 40
+	setcycle 431 left_mm -80
+	setcycle 431 mouse_loc -15
+	setcycle 431 right_mm 40
+	setcycle 432 left_mm -40
+	setcycle 432 mouse_loc -15
+	setcycle 432 right_mm 40
+	setcycle 433 left_mm -40
+	setcycle 433 mouse_loc -15
+	setcycle 433 right_mm 40
+	setcycle 434 left_mm -80
+	setcycle 434 mouse_loc -15
+	setcycle 434 right_mm 40
+	setcycle 435 left_mm -80
+	setcycle 435 mouse_loc -15
+	setcycle 435 right_mm 40
+	setcycle 436 left_mm -40
+	setcycle 436 mouse_loc -15
+	setcycle 436 right_mm 40
+	setcycle 437 left_mm -40
+	setcycle 437 mouse_loc -15
+	setcycle 437 right_mm 40
+	setcycle 438 left_mm -80
+	setcycle 438 mouse_loc -15
+	setcycle 438 right_mm 40
+	setcycle 439 left_mm -80
+	setcycle 439 mouse_loc -15
+	setcycle 439 right_mm 40
+	setcycle 440 left_mm -40
+	setcycle 440 mouse_loc -15
+	setcycle 440 right_mm 40
+	setcycle 441 left_mm -40
+	setcycle 441 mouse_loc -15
+	setcycle 441 right_mm 40
+	setcycle 442 left_mm -80
+	setcycle 442 mouse_loc -15
+	setcycle 442 right_mm 40
+	setcycle 443 left_mm -80
+	setcycle 443 mouse_loc -15
+	setcycle 443 right_mm 40
+	setcycle 444 left_mm -40
+	setcycle 444 mouse_loc -15
+	setcycle 444 right_mm 40
+	setcycle 445 left_mm -40
+	setcycle 445 mouse_loc -15
+	setcycle 445 right_mm 40
+	setcycle 446 left_mm -80
+	setcycle 446 mouse_loc -15
+	setcycle 446 right_mm 40
+	setcycle 447 left_mm -80
+	setcycle 447 mouse_loc -15
+	setcycle 447 right_mm 40
+	setcycle 448 left_mm -40
+	setcycle 448 mouse_loc 15
+	setcycle 448 right_mm 80
+	setcycle 449 left_mm -40
+	setcycle 449 mouse_loc 15
+	setcycle 449 right_mm 80
+	setcycle 450 left_mm -80
+	setcycle 450 mouse_loc 15
+	setcycle 450 right_mm 80
+	setcycle 451 left_mm -80
+	setcycle 451 mouse_loc 15
+	setcycle 451 right_mm 80
+	setcycle 452 left_mm -40
+	setcycle 452 mouse_loc 15
+	setcycle 452 right_mm 80
+	setcycle 453 left_mm -40
+	setcycle 453 mouse_loc 15
+	setcycle 453 right_mm 80
+	setcycle 454 left_mm -80
+	setcycle 454 mouse_loc 15
+	setcycle 454 right_mm 80
+	setcycle 455 left_mm -80
+	setcycle 455 mouse_loc 15
+	setcycle 455 right_mm 80
+	setcycle 456 left_mm -40
+	setcycle 456 mouse_loc 15
+	setcycle 456 right_mm 80
+	setcycle 457 left_mm -40
+	setcycle 457 mouse_loc 15
+	setcycle 457 right_mm 80
+	setcycle 458 left_mm -80
+	setcycle 458 mouse_loc 15
+	setcycle 458 right_mm 80
+	setcycle 459 left_mm -80
+	setcycle 459 mouse_loc 15
+	setcycle 459 right_mm 80
+	setcycle 460 left_mm -40
+	setcycle 460 mouse_loc 15
+	setcycle 460 right_mm 80
+	setcycle 461 left_mm -40
+	setcycle 461 mouse_loc 15
+	setcycle 461 right_mm 80
+	setcycle 462 left_mm -80
+	setcycle 462 mouse_loc 15
+	setcycle 462 right_mm 80
+	setcycle 463 left_mm -80
+	setcycle 463 mouse_loc 15
+	setcycle 463 right_mm 80
+	setcycle 464 left_mm -40
+	setcycle 464 mouse_loc 15
+	setcycle 464 right_mm 80
+	setcycle 465 left_mm -40
+	setcycle 465 mouse_loc 15
+	setcycle 465 right_mm 80
+	setcycle 466 left_mm -80
+	setcycle 466 mouse_loc 15
+	setcycle 466 right_mm 80
+	setcycle 467 left_mm -80
+	setcycle 467 mouse_loc 15
+	setcycle 467 right_mm 80
+	setcycle 468 left_mm -40
+	setcycle 468 mouse_loc 15
+	setcycle 468 right_mm 80
+	setcycle 469 left_mm -40
+	setcycle 469 mouse_loc 15
+	setcycle 469 right_mm 80
+	setcycle 470 left_mm -80
+	setcycle 470 mouse_loc 15
+	setcycle 470 right_mm 80
+	setcycle 471 left_mm -80
+	setcycle 471 mouse_loc 15
+	setcycle 471 right_mm 80
+	setcycle 472 left_mm -40
+	setcycle 472 mouse_loc 15
+	setcycle 472 right_mm 80
+	setcycle 473 left_mm -40
+	setcycle 473 mouse_loc 15
+	setcycle 473 right_mm 80
+	setcycle 474 left_mm -80
+	setcycle 474 mouse_loc 15
+	setcycle 474 right_mm 80
+	setcycle 475 left_mm -80
+	setcycle 475 mouse_loc 15
+	setcycle 475 right_mm 80
+	setcycle 476 left_mm -40
+	setcycle 476 mouse_loc 15
+	setcycle 476 right_mm 80
+	setcycle 477 left_mm -40
+	setcycle 477 mouse_loc 15
+	setcycle 477 right_mm 80
+	setcycle 478 left_mm -80
+	setcycle 478 mouse_loc 15
+	setcycle 478 right_mm 80
+	setcycle 479 left_mm -80
+	setcycle 479 mouse_loc 15
+	setcycle 479 right_mm 80
+	setcycle 480 left_mm -40
+	setcycle 480 mouse_loc -15
+	setcycle 480 right_mm 80
+	setcycle 481 left_mm -40
+	setcycle 481 mouse_loc -15
+	setcycle 481 right_mm 80
+	setcycle 482 left_mm -80
+	setcycle 482 mouse_loc -15
+	setcycle 482 right_mm 80
+	setcycle 483 left_mm -80
+	setcycle 483 mouse_loc -15
+	setcycle 483 right_mm 80
+	setcycle 484 left_mm -40
+	setcycle 484 mouse_loc -15
+	setcycle 484 right_mm 80
+	setcycle 485 left_mm -40
+	setcycle 485 mouse_loc -15
+	setcycle 485 right_mm 80
+	setcycle 486 left_mm -80
+	setcycle 486 mouse_loc -15
+	setcycle 486 right_mm 80
+	setcycle 487 left_mm -80
+	setcycle 487 mouse_loc -15
+	setcycle 487 right_mm 80
+	setcycle 488 left_mm -40
+	setcycle 488 mouse_loc -15
+	setcycle 488 right_mm 80
+	setcycle 489 left_mm -40
+	setcycle 489 mouse_loc -15
+	setcycle 489 right_mm 80
+	setcycle 490 left_mm -80
+	setcycle 490 mouse_loc -15
+	setcycle 490 right_mm 80
+	setcycle 491 left_mm -80
+	setcycle 491 mouse_loc -15
+	setcycle 491 right_mm 80
+	setcycle 492 left_mm -40
+	setcycle 492 mouse_loc -15
+	setcycle 492 right_mm 80
+	setcycle 493 left_mm -40
+	setcycle 493 mouse_loc -15
+	setcycle 493 right_mm 80
+	setcycle 494 left_mm -80
+	setcycle 494 mouse_loc -15
+	setcycle 494 right_mm 80
+	setcycle 495 left_mm -80
+	setcycle 495 mouse_loc -15
+	setcycle 495 right_mm 80
+	setcycle 496 left_mm -40
+	setcycle 496 mouse_loc -15
+	setcycle 496 right_mm 80
+	setcycle 497 left_mm -40
+	setcycle 497 mouse_loc -15
+	setcycle 497 right_mm 80
+	setcycle 498 left_mm -80
+	setcycle 498 mouse_loc -15
+	setcycle 498 right_mm 80
+	setcycle 499 left_mm -80
+	setcycle 499 mouse_loc -15
+	setcycle 499 right_mm 80
+	setcycle 500 left_mm -40
+	setcycle 500 mouse_loc -15
+	setcycle 500 right_mm 80
+	setcycle 501 left_mm -40
+	setcycle 501 mouse_loc -15
+	setcycle 501 right_mm 80
+	setcycle 502 left_mm -80
+	setcycle 502 mouse_loc -15
+	setcycle 502 right_mm 80
+	setcycle 503 left_mm -80
+	setcycle 503 mouse_loc -15
+	setcycle 503 right_mm 80
+	setcycle 504 left_mm -40
+	setcycle 504 mouse_loc -15
+	setcycle 504 right_mm 80
+	setcycle 505 left_mm -40
+	setcycle 505 mouse_loc -15
+	setcycle 505 right_mm 80
+	setcycle 506 left_mm -80
+	setcycle 506 mouse_loc -15
+	setcycle 506 right_mm 80
+	setcycle 507 left_mm -80
+	setcycle 507 mouse_loc -15
+	setcycle 507 right_mm 80
+	setcycle 508 left_mm -40
+	setcycle 508 mouse_loc -15
+	setcycle 508 right_mm 80
+	setcycle 509 left_mm -40
+	setcycle 509 mouse_loc -15
+	setcycle 509 right_mm 80
+	setcycle 510 left_mm -80
+	setcycle 510 mouse_loc -15
+	setcycle 510 right_mm 80
+	setcycle 511 left_mm -80
+	setcycle 511 mouse_loc -15
+	setcycle 511 right_mm 80
 	run line_bisection
 
-define inline_script experiment_script
-	set description "Executes Python code"
+define inline_javascript experiment_prep
+	set description "Executes JavaScript code (ECMA 5.1)"
 	set _run ""
 	___prepare__
-	## preparing for the experiment
-	# calculate mm per pixel based on debit card actual length + pixels of line from this 
-	# screen width & height- as defined by participant in form
-	var.pix_permm = var.card_pix/var.card_mm #x resolution divided by widthx10
+	// preparing for the experiment
+	// calculate mm per pixel based on debit card actual length + pixels of line from this 
+	vars.card_pix = vars.screen_test_x2 - vars.screen_test_x1
+	vars.pix_permm = vars.card_pix/vars.card_mm //x resolution divided by widthx10
 	
-	# start-point of the line
-	var.left_pix = var.pix_permm*var.left_mm
-	var.right_pix = var.pix_permm*var.right_mm
-	var.y_pix = var.pix_permm*var.line_y_pos
+	// start-point of the line
+	vars.left_pix = vars.pix_permm*vars.left_mm
+	vars.right_pix = vars.pix_permm*vars.right_mm
+	vars.y_pix = vars.pix_permm*vars.line_y_pos
 	
-	# get line length in pixels for later calc
-	var.linelength_pix = var.linelength_mm*var.pix_permm
+	// get line length in pixels for later calc
+	vars.linelength_pix = vars.right_pix - vars.left_pix
 	
-	var.line_pres_time = clock.time() - t0
+	// click box locations
+	vars.mouse_loc_pix = vars.mouse_loc*vars.pix_permm
+	vars.click_pix_y = 35*vars.pix_permm
+	vars.mouse_loc_pix_y = 25*vars.pix_permm
 	
-	#set void trial back to 0
-	var.void_trial = 0
+	// set void trial back to 0
+	vars.void_trial = 0
+	__end__
+
+define inline_javascript experiment_prep_1
+	set description "Executes JavaScript code (ECMA 5.1)"
+	set _run ""
+	___prepare__
+	// preparing for the experiment
+	// calculate mm per pixel based on debit card actual length + pixels of line from this 
+	vars.card_pix = vars.screen_test_x2 - vars.screen_test_x1
+	vars.pix_permm = vars.card_pix/vars.card_mm //x resolution divided by widthx10
+	
+	// start-point of the line
+	vars.left_pix = vars.pix_permm*vars.left_mm
+	vars.right_pix = vars.pix_permm*vars.right_mm
+	vars.y_pix = vars.pix_permm*vars.line_y_pos
+	
+	// get line length in pixels for later calc
+	vars.linelength_pix = vars.right_pix - vars.left_pix
+	
+	// click box locations
+	vars.mouse_loc_pix = vars.mouse_loc*vars.pix_permm
+	vars.click_pix_y = 35*vars.pix_permm
+	vars.mouse_loc_pix_y = 25*vars.pix_permm
+	
+	// set void trial back to 0
+	vars.void_trial = 0
 	__end__
 
 define sequence experiment_sequence
 	set flush_keyboard yes
 	set description "Runs a number of items in sequence"
 	run line_bisection_intro always
+	run practice_loop always
+	run experiment_start always
 	run experiment_loop always
 
-define notepad getting_started
-	__note__
-	Welcome to OpenSesame 3.3 "Lentiform Loewenfeld"!
-	If you are new to OpenSesame, it is a good idea to follow one of the tutorials,
-	which can be found on the documentation site:
-	- <http://osdoc.cogsci.nl/>
-	You can also check out the examples. These can be opened via:
-	- Menu -> Tools -> Example experiments.
-	And feel free to ask for help on the forum:
-	- <http://forum.cogsci.nl/>
-	Have fun with OpenSesame!
-	__end__
-	set description "A simple notepad to document your experiment. This plug-in does nothing."
+define sketchpad experiment_start
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=32 html=yes show_if=always text="The practice is now over<br /><br />To start line bisection task, press SPACE" x=0 y=0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="" x=-32 y=-32 z_index=0
 
-define inline_script global_prep
-	set description "Executes Python code"
+define inline_javascript java_global_prep
+	set description "Executes JavaScript code (ECMA 5.1)"
 	___run__
-	import csv
-	from datetime import datetime
-	from enum import Enum
+	// packages useful for generating random arrays and selecting from them
+	// handing for varying target onset time
+	//import random from 'random'
+	//from random import choice
+	//import numpy as np
 	
-	from libopensesame import sketchpad_elements
-	from openexp.keyboard import keyboard
+	//import math
 	
-	# packages useful for generating random arrays and selecting from them
-	# handing for varying target onset time
-	import random
-	from random import choice
-	import numpy as np
+	//beep = items['beep']
+	//blank = items['blank']
 	
-	import math
+	//response items
+	//stim, response = items['line'], items['line_mouse_response']
 	
-	m = Mouse()
-	myKeys = keyboard(exp, keylist=['space','left','right','return'])
+	// screen measurement variables that need defining
+	vars.breaking_variable = false
+	// line location
+	vars.screen_test_x1 = -450
+	vars.screen_test_x2 = 0
+	vars.line_y_pos = 0
+	vars.card_mm = 86 //for finding mm per pix
+	vars.response_mouseclick_done = 0
 	
-	#beep = items['beep']
-	#blank = items['blank']
+	//LocalDate date = LocalDate.now()
+	//t0 = clock.time()
 	
-	#response items
-	stim, response = items['line'], items['line_mouse_response']
-	#fixation = items['fixation']
+	// recording log file specfic to experiment
+	//subject_nr_string = Integer.toString(vars.subject_nr)
+	//data_path = u'/home/experimenter/DMT-AD/DMT2019_rawdata/'
+	//vars.data_string = 'subject{sub}_{title}_{date}.csv'
 	
-	# defining bounding box for target response
-	def in_bounds(x,y,bounds):
-		left, top, right, bottom = bounds
-		return x > left and x < right and y > top and y < bottom
-	
-	# screen measurement variables that need defining
-	var.breaking_variable = False
-	# line location
-	var.screen_test_x1 = -450
-	var.screen_test_x2 = 0
-	var.card_mm = 86 #for finding mm per pix
-	
-<<<<<<< Updated upstream
-	# screen width & height- as defined by participant in form
-	var.width_cm = 60
-	var.height_cm = 35.5
-	#width_px = 1080
-	#height_px = 720
-	
-	#sizes in mm for reporting - based on resolution calculation earlier
-	var.pix_permmX = width_px/(var.width_cm*10) #x resolution divided by widthx10
-	var.pix_permmY = height_px/(var.height_cm*10) 
-=======
-	t0 = clock.time()
->>>>>>> Stashed changes
-	
-	# recording log file specfic to experiment
-	subject_nr_string = str(var.subject_nr)
-	date_str = datetime.now().isoformat()[:-7]
-	#data_path = u'/home/experimenter/DMT-AD/DMT2019_rawdata/'
-	#data_string = u'subject{sub}_{title}_{hand}_{date}.csv'
-	#individual subject path
-	#data_dir = os.path.join(data_path,subject_nr_string)
-	#if not os.path.exists(data_dir):
-			#os.makedirs(data_dir)
-	#data_outpath = os.path.join(data_dir, data_string)
-	#datafile = log.open(data_outpath.format(sub=subject_nr_string, date=date_str, title=var.title, hand=var.hand))
-	
-	# target onset time array
-	#target_onset_values = list(np.arange(250,850,100))
-	
-	#manual trial counter for limiting experiment to max 50 trials
-	#var.valid_trial_count = 0
-	__end__
-	set _prepare ""
-
-define inline_script invalid_trial_check
-	set description "Executes Python code"
-	___run__
-	#marking voided trial when they click outside bounds of line
-	if self.get('cursor_y') > (var.pix_permm*10):
-		var.void_trial = 1
-	
-	if self.get('cursor_y') < (var.pix_permm*-10):
-		var.void_trial = 1
-		
-	if self.get('cursor_x') < (var.left_pix):
-		var.void_trial = 1
-		
-	if self.get('cursor_x') > (var.right_pix):
-		var.void_trial = 1
+	vars.response = "None"
 	__end__
 	set _prepare ""
 
@@ -241,36 +1730,12 @@ define sketchpad line
 	set description "Displays stimuli"
 	draw line color=white penwidth=5 show_if=always x1="[left_pix]" x2="[right_pix]" y1="[y_pix]" y2="[y_pix]" z_index=0
 
-define sequence line_bisection
-	set flush_keyboard yes
-	set description "Runs a number of items in sequence"
-	run experiment_script always
-	run line always
-	run line_mouse_response always
-	run blank always
-	run mouse_response_reset always
-	run click_here never
-	run new_mouse_response_1 never
-	run invalid_trial_check always
-	run logger always
-	run repeat_invalid always
-
-define sketchpad line_bisection_intro
-	set duration keypress
+define sketchpad line_1
+	set duration 0
 	set description "Displays stimuli"
-	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="Instruction screen" x=0 y=0 z_index=0
+	draw line color=white penwidth=5 show_if=always x1="[left_pix]" x2="[right_pix]" y1="[y_pix]" y2="[y_pix]" z_index=0
 
-define mouse_response line_mouse_response
-	set timeout infinite
-	set show_cursor yes
-	set linked_sketchpad line
-	set flush yes
-	set event_type mouseclick
-	set duration mouseclick
-	set description "Collects mouse responses"
-	set allowed_responses left_button
-
-define logger logger
+define logger line_bisect_logger
 	set description "Logs experimental data"
 	set auto_log no
 	log avg_rt
@@ -292,76 +1757,99 @@ define logger logger
 	log pix_permm
 	log void_trial
 	log linelength_pix
+	log subject_nr
+	log EHI_writing
+	log EHI_throwing
+	log EHI_toothbrush
+	log EHI_spoon
+	log practice
+
+define logger line_bisect_logger_1
+	set description "Logs experimental data"
+	set auto_log no
+	log avg_rt
+	log card_mm
+	log card_pix
+	log count_line_bisection
+	log bisect_x
+	log bisect_y
+	log datetime
+	log left_mm
+	log left_pix
+	log right_mm
+	log right_pix
+	log line
+	log linelength_mm
+	log line_response_time
+	log line_y_pos
+	log mouse_pos
+	log pix_permm
+	log void_trial
+	log linelength_pix
+	log subject_nr
+	log EHI_writing
+	log EHI_throwing
+	log EHI_toothbrush
+	log EHI_spoon
+	log practice
+
+define sequence line_bisection
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run experiment_prep always
+	run line always
+	run line_mouse_response always
+	run click_here_1 always
+	run click_here_resp always
+	run valid_check always
+	run line_bisect_logger always
+	run repeat_ybelow always
+	run repeat_yabove always
+
+define sketchpad line_bisection_intro
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=yes font_family=mono font_italic=no font_size=32 html=yes show_if=always text="LINE BISECTION TASK" x=0 y=-384 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=32 html=yes show_if=always text="In this next part of the experiment you will see a line.<br /><br />Your task is to click the MIDDLE of the line. <br /><br />Please notw we are interested in how you perceive the mid-point of the line, <br />so please DO NOT use any additional tools.<br /><br />If you do not click on or near the line, the trial will be repeated.<br /><br />You will first be given some practice trials to get you used to the task. <br /><br />When you are ready, press SPACE" x=0 y=0 z_index=0
+
+define sequence line_bisection_prac
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run experiment_prep_1 always
+	run line_1 always
+	run line_mouse_response_1 always
+	run click_here_1_1 always
+	run click_here_resp_1 always
+	run valid_check_1 always
+	run repeat_ybelow_1 always
+	run repeat_yabove_1 always
+
+define mouse_response line_mouse_response
+	set timeout infinite
+	set show_cursor yes
+	set linked_sketchpad line
+	set flush yes
+	set event_type mouseclick
+	set duration mouseclick
+	set description "Collects mouse responses"
+	set allowed_responses left_button
+
+define mouse_response line_mouse_response_1
+	set timeout infinite
+	set show_cursor yes
+	set linked_sketchpad line_1
+	set flush yes
+	set event_type mouseclick
+	set duration mouseclick
+	set description "Collects mouse responses"
+	set allowed_responses left_button
 
 define sequence main
 	set flush_keyboard yes
 	set description "Runs a number of items in sequence"
 	run outside_loop always
 
-define inline_script mouse_response_reset
-	set description "Executes Python code"
-	___run__
-	
-	#get mouse response location
-	(x,y),time = m.get_pos()
-	var.bisect_x = x
-	var.bisect_y = y
-	var.line_end_time = time - t0
-	
-	# get response time, just incase
-	var.line_response_time = var.line_end_time - var.line_pres_time
-	
-	# randomly setting mouse position between -15 and +15mm
-	mouse_pos_list = list(np.arange((var.pix_permm*-15),(var.pix_permm*15),10))
-	var.mouse_pos = random.choice(mouse_pos_list)
-	m.set_pos(pos=(var.mouse_pos,var.pix_permm*50))
-	__end__
-	set _prepare ""
-
-define form_multiple_choice new_form_multiple_choice
-	set timeout infinite
-	set spacing 10
-	set question "Your question"
-	__options__
-	Yes
-	No
-	Maybe
-	__end__
-	set margins "50;50;50;50"
-	set form_var response
-	set form_title "Form title"
-	set description "A simple multiple choice item"
-	set button_text Ok
-	set allow_multiple yes
-	set advance_immediately yes
-	set _theme gray
-
-define form_text_input new_form_text_input
-	set timeout infinite
-	set spacing 10
-	set rows "1;1;6"
-	set only_render no
-	set margins "50;50;50;50"
-	set form_var response
-	set form_title Title
-	set form_question "Your question"
-	set description "A simple text input form"
-	set cols 1
-	set _theme gray
-	widget 0 0 1 1 label text="[form_title]"
-	widget 0 1 1 1 label center=no text="[form_question]"
-	widget 0 2 1 1 text_input focus=yes return_accepts=yes stub="" var="[form_var]"
-
-
-define keyboard_response new_keyboard_response
-	set timeout infinite
-	set flush yes
-	set event_type keypress
-	set duration keypress
-	set description "Collects keyboard responses"
-	set allowed_responses "left;right"
-
-define mouse_response new_mouse_response
+define mouse_response mouseclick_done
 	set timeout infinite
 	set show_cursor yes
 	set linked_sketchpad ""
@@ -370,14 +1858,14 @@ define mouse_response new_mouse_response
 	set duration mouseclick
 	set description "Collects mouse responses"
 
-define mouse_response new_mouse_response_1
-	set timeout infinite
-	set show_cursor yes
-	set linked_sketchpad click_here
-	set flush yes
-	set event_type mouseclick
-	set duration mouseclick
-	set description "Collects mouse responses"
+define sketchpad new_sketchpad
+	set duration keypress
+	set description "Displays stimuli"
+
+define sketchpad new_sketchpad_1
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="you passed the screen loop" x=0 y=-128 z_index=0
 
 define loop outside_loop
 	set source_file ""
@@ -395,81 +1883,109 @@ define loop outside_loop
 define sequence outside_sequence
 	set flush_keyboard yes
 	set description "Runs a number of items in sequence"
-	run global_prep always
-<<<<<<< Updated upstream
-	run new_sketchpad always
-	run screen_resolution always
-	run custom_form always
-	run experiment_loop always
-	run logger always
-=======
+	run java_global_prep always
 	run screen_loop always
 	run experiment_sequence always
 
-define inline_script repeat_invalid
-	set description "Executes Python code"
+define loop practice_loop
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 8
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 left_mm -40
+	setcycle 0 mouse_loc 15
+	setcycle 0 right_mm 40
+	setcycle 1 left_mm -40
+	setcycle 1 mouse_loc 15
+	setcycle 1 right_mm 40
+	setcycle 2 left_mm -40
+	setcycle 2 mouse_loc 15
+	setcycle 2 right_mm 40
+	setcycle 3 left_mm -40
+	setcycle 3 mouse_loc 15
+	setcycle 3 right_mm 40
+	setcycle 4 left_mm -40
+	setcycle 4 mouse_loc 15
+	setcycle 4 right_mm 80
+	setcycle 5 left_mm -40
+	setcycle 5 mouse_loc 15
+	setcycle 5 right_mm 80
+	setcycle 6 left_mm -40
+	setcycle 6 mouse_loc 15
+	setcycle 6 right_mm 80
+	setcycle 7 left_mm -40
+	setcycle 7 mouse_loc 15
+	setcycle 7 right_mm 80
+	run line_bisection_prac
+
+define sequence practice_sequence
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+
+define inline_javascript repeat
+	set description "Executes JavaScript code (ECMA 5.1)"
+	set _run "if vars.response_screen"
+	set _prepare ""
+
+define repeat_cycle repeat_screen_measurement
+	set description "Optionally repeat a cycle from a loop"
+	set condition "[response_screen_key]!=space"
+
+define repeat_cycle repeat_yabove
+	set description "Optionally repeat a cycle from a loop"
+	set condition "[cursor_y] < -100"
+
+define repeat_cycle repeat_yabove_1
+	set description "Optionally repeat a cycle from a loop"
+	set condition "[cursor_y] < -100"
+
+define repeat_cycle repeat_ybelow
+	set description "Optionally repeat a cycle from a loop"
+	set condition "[cursor_y] < 100"
+
+define repeat_cycle repeat_ybelow_1
+	set description "Optionally repeat a cycle from a loop"
+	set condition "[cursor_y] < 100"
+
+define inline_javascript screen_info
+	set description "Executes JavaScript code (ECMA 5.1)"
 	___run__
-	# repeat trial if click along the y-axis was over 2cm away from the line
-	# forcing accuracy
+	// changing screen variables depending on keyboard response
+	if (vars.response_screen_key == 'left') {	
+		vars.screen_test_x2 = vars.screen_test_x2 - 5
+		vars.breaking_variable = false
+	}
 	
-	if self.get('cursor_y') > (var.pix_permm*10):
-			# prepare trail sequence again
-		exp.items['line_bisection'].prepare()
-		# re-run trial sequence
-		exp.items['line_bisection'].run()
-		void_trial = 1
+	if (vars.response_screen_key == "right") {
+		vars.screen_test_x2 = vars.screen_test_x2 + 5
+		vars.breaking_variable = false
+	} 
 	
-	if self.get('cursor_y') < (var.pix_permm*-10):
-			# prepare trail sequence again
-		exp.items['line_bisection'].prepare()
-		# re-run trial sequence
-		exp.items['line_bisection'].run()
-		void_trial = 1
-		
-	if self.get('cursor_x') < (var.left_pix):
-			# prepare trail sequence again
-		exp.items['line_bisection'].prepare()
-		# re-run trial sequence
-		exp.items['line_bisection'].run()
-		void_trial = 1
-		
-	if self.get('cursor_x') > (var.right_pix):
-			# prepare trail sequence again
-		exp.items['line_bisection'].prepare()
-		# re-run trial sequence
-		exp.items['line_bisection'].run()
-		void_trial = 1
-		
-	else: 
-		void_trial = 0
+	if (vars.response_screen_key == "space") {
+		vars.breaking_variable = true
+	}
+	
+	
+	if (vars.response_screen_key == "SPACE") {
+		vars.breaking_variable = true
+	}
 	__end__
 	set _prepare ""
 
-define inline_script screen_info_script
-	set description "Executes Python code"
-	___run__
-	screen_key, screen_time = myKeys.get_key()
-	
-	if screen_key == 'left':
-		var.screen_test_x2 = var.screen_test_x2 - 5
-		var.breaking_variable = False
-		
-	if screen_key == 'right':
-		var.screen_test_x2 = var.screen_test_x2 + 5
-		var.breaking_variable = False
-		
-	if screen_key == 'space':
-		var.breaking_variable = True
-		var.card_pix = var.screen_test_x2 - var.screen_test_x1
-	__end__
-	set _prepare ""
-
-define sketchpad screen_instructions
+define keyboard_response screen_key
+	set timeout infinite
+	set flush yes
+	set event_type keypress
 	set duration keypress
-	set description "Displays stimuli"
+	set description "Collects keyboard responses"
+	set allowed_responses "right;left;space;SPACE"
 
 define loop screen_loop
-	set source_file ""
 	set source table
 	set repeat 50
 	set order random
@@ -477,7 +1993,7 @@ define loop screen_loop
 	set cycles 1
 	set continuous no
 	set break_if_on_first yes
-	set break_if "[breaking_variable] = yes"
+	set break_if "[response] = space"
 	setcycle 0 empty_column ""
 	run screen_sequence
 
@@ -485,77 +2001,60 @@ define sketchpad screen_measurements
 	set duration 0
 	set description "Displays stimuli"
 	draw line color=white penwidth=5 show_if=always x1="[screen_test_x1]" x2="[screen_test_x2]" y1=-200 y2=-200 z_index=0
-	draw textline center=0 color=white font_bold=no font_family=sans font_italic=no font_size=24 html=yes show_if=always text="Before the next task, we need to know the resolution of your screen.<br /><br />Place the long edge of a DEBIT/CREDIT card against the line. <br />Press the LEFT or RIGHT arrow keys to adjust length of the line until it is the same length as the debit/credit card<br /><br />Press 'SPACE' when done" x=-448 y=0 z_index=0
+	draw textline center=0 color=white font_bold=no font_family=sans font_italic=no font_size=32 html=yes show_if=always text="Before the next task, we need to know the resolution of your screen.<br /><br />Place the long edge of a DEBIT/CREDIT card against the line. <br />Press the LEFT or RIGHT arrow keys to adjust length of the line until it is the same length as the debit/credit card<br /><br />When ready, press 'SPACE' to continue" x=-832 y=0 z_index=0
 
 define sequence screen_sequence
 	set flush_keyboard yes
 	set description "Runs a number of items in sequence"
 	run screen_measurements always
-	run screen_info_script always
->>>>>>> Stashed changes
+	run screen_key always
+	run screen_info always
 
-define inline_script screen_resolution
-	set description "Executes Python code"
+define inline_javascript valid_check
+	set description "Executes JavaScript code (ECMA 5.1)"
 	___run__
-	#### ALL IMPORTANT SCREEN RESOLUTION
-	#import pyautogui
-	#width_px, height_px = pyautogui.size()
-	__end__
-	___prepare__
-	#### ALL IMPORTANT SCREEN RESOLUTION
-	import tkinter as tk
+	// marking voided trial when they click outside bounds of line
+	if (vars.cursor_y > (vars.pix_permm*10)){
+		vars.void_trial = 1
+	}
 	
-	root = tk.Tk()
+	if (vars.cursor_y < (vars.pix_permm*-10)){
+		vars.void_trial = 1
+	}
+		
+	if (vars.cursor_x < (vars.left_pix)){
+		vars.void_trial = 1
+	}
+		
+	if (vars.cursor_x > (vars.right_pix)){
+		vars.void_trial = 1
+	}
 	
-	width_px = root.winfo_screenwidth()
-	height_px = root.winfo_screenheight()
-	__end__
-
-define inline_script screen_size_form
-	set description "Executes Python code"
-	___run__
-	def filter_digits(ch):
-	
-	    """Allows only digit characters as input"""
-	
-	    return ch in u'0123456789'
-	    
-	# Create a form
-	form = Form(
-	    cols=[1,1,1], rows=[1,1,1]
-	)
-	
-	# Create four widgets
-	labelTitle = Label(text=u'Screen size')
-	labelQuestion = Label(
-	    text=u'Please enter the width and height of your computer screen in cm',
-	    center=False
-	)
-	label_width = Label(u'Screen width:')
-	width_text = TextInput(stub=u'Width         …', var='width', key_filter=filter_digits
-	)
-	label_height = Label(u'Screen height:')
-	height_text = TextInput(stub=u'Height         …', var='height', key_filter=filter_digits
-	)
-	# Add the widgets to the form. The position in the form is indicated as a
-	# (column, row) tuple.
-	form.set_widget(labelTitle, (0,0), colspan = 2)
-	form.set_widget(labelQuestion, (0,1), colspan = 2)
-	form.set_widget(label_width, (0,1))
-	form.set_widget(label_height, (1,1))
-	form.set_widget(width_text, (0,1))
-	form.set_widget(height_text, (1,1))
-	# Execute the form! In this case, the form will return the text of the button that
-	# was clicked. This is one way to get a return value out of the form. Another way
-	# is to use the 'var' keyword, supported some of the widgets.
-	dimensions = form._exec()
+	vars.practice = 0
 	__end__
 	set _prepare ""
 
-define sketchpad welcome
-	set start_response_interval no
-	set reset_variables no
-	set duration keypress
-	set description "Displays stimuli"
-	draw textline center=1 color=white font_bold=no font_family=serif font_italic=no font_size=32 html=yes show_if=always text="OpenSesame 3.3 <i>Lentiform Loewenfeld</i>" x=0 y=0 z_index=0
+define inline_javascript valid_check_1
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	// marking voided trial when they click outside bounds of line
+	if (vars.cursor_y > (vars.pix_permm*10)){
+		vars.void_trial = 1
+	}
+	
+	if (vars.cursor_y < (vars.pix_permm*-10)){
+		vars.void_trial = 1
+	}
+		
+	if (vars.cursor_x < (vars.left_pix)){
+		vars.void_trial = 1
+	}
+		
+	if (vars.cursor_x > (vars.right_pix)){
+		vars.void_trial = 1
+	}
+	
+	vars.practice = 0
+	__end__
+	set _prepare ""
 
