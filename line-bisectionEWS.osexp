@@ -1,0 +1,524 @@
+---
+API: 2.1
+OpenSesame: 3.2.8b1
+Platform: posix
+---
+set width 1920
+set uniform_coordinates yes
+set title IAPN
+set subject_parity even
+set subject_nr 0
+set start main
+set sound_sample_size -16
+set sound_freq 48000
+set sound_channels 2
+set sound_buf_size 1024
+set sampler_backend legacy
+set round_decimals 2
+set mouse_backend psycho
+set keyboard_backend psycho
+set height 1080
+set fullscreen no
+set form_clicks no
+set foreground white
+set font_underline no
+set font_size 18
+set font_italic no
+set font_family mono
+set font_bold no
+set experiment_path "/home/experimenter/IAPN"
+set disable_garbage_collection yes
+set description "The main experiment item"
+set coordinates uniform
+set compensation 0
+set color_backend psycho
+set clock_backend psycho
+set canvas_backend psycho
+set background black
+
+define sketchpad check_card
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=32 html=yes show_if=always text="If you your line was not the length of a debit card, <br />please press 'esc' and 'Q' to restart the experiment & try again.<br /><br />If your line matched the length of a debit card, press SPACE to proceed" x=0 y=0 z_index=0
+
+define sketchpad click_here_1
+	set duration 0
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=yes font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Click the dot" x=0 y="[click_pix_y]" z_index=0
+	draw fixdot color=white show_if=always style=default x="[mouse_loc_pix]" y="[mouse_loc_pix_y]" z_index=0
+
+define sketchpad click_here_1_1
+	set duration 0
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=yes font_family=mono font_italic=no font_size=24 html=yes show_if=always text="Click the dot" x=0 y="[click_pix_y]" z_index=0
+	draw fixdot color=white show_if=always style=default x="[mouse_loc_pix]" y="[mouse_loc_pix_y]" z_index=0
+
+define mouse_response click_here_resp
+	set timeout infinite
+	set show_cursor yes
+	set linked_sketchpad ""
+	set flush yes
+	set event_type mouseclick
+	set duration mouseclick
+	set description "Collects mouse responses"
+	set allowed_responses "left_button;right_button"
+
+define mouse_response click_here_resp_1
+	set timeout infinite
+	set show_cursor yes
+	set linked_sketchpad ""
+	set flush yes
+	set event_type mouseclick
+	set duration mouseclick
+	set description "Collects mouse responses"
+	set allowed_responses "left_button;right_button"
+
+define sketchpad end
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=32 html=yes show_if=always text="The study is now finished<br />Thank you! <br /><br />Press 'SPACE' to exit" x=0.0 y=0.0 z_index=0
+
+define loop experiment_loop
+	set source_file "line-bisection_stim.csv"
+	set source table
+	set repeat 16
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 8
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 left_mm -40
+	setcycle 0 right_mm 40
+	setcycle 0 mouse_loc 15
+	setcycle 1 left_mm -40
+	setcycle 1 right_mm 80
+	setcycle 1 mouse_loc 15
+	setcycle 2 left_mm -80
+	setcycle 2 right_mm 40
+	setcycle 2 mouse_loc 15
+	setcycle 3 left_mm -80
+	setcycle 3 right_mm 80
+	setcycle 3 mouse_loc 15
+	setcycle 4 left_mm -40
+	setcycle 4 right_mm 40
+	setcycle 4 mouse_loc -15
+	setcycle 5 left_mm -40
+	setcycle 5 right_mm 80
+	setcycle 5 mouse_loc -15
+	setcycle 6 left_mm -80
+	setcycle 6 right_mm 40
+	setcycle 6 mouse_loc -15
+	setcycle 7 left_mm -80
+	setcycle 7 right_mm 80
+	setcycle 7 mouse_loc -15
+	run line_bisection
+
+define inline_javascript experiment_prep
+	set description "Executes JavaScript code (ECMA 5.1)"
+	set _run ""
+	___prepare__
+	// preparing for the experiment
+	// calculate mm per pixel based on debit card actual length + pixels of line from this 
+	vars.card_pix = vars.screen_test_x2 - vars.screen_test_x1
+	vars.pix_permm = vars.card_pix/vars.card_mm //x resolution divided by widthx10
+	
+	// start-point of the line
+	vars.left_pix = vars.pix_permm*vars.left_mm
+	vars.right_pix = vars.pix_permm*vars.right_mm
+	vars.y_pix = vars.pix_permm*vars.line_y_pos
+	
+	// get line length in pixels for later calc
+	vars.linelength_pix = vars.right_pix - vars.left_pix
+	
+	// click box locations
+	vars.mouse_loc_pix = vars.mouse_loc*vars.pix_permm
+	vars.click_pix_y = 35*vars.pix_permm
+	vars.mouse_loc_pix_y = 25*vars.pix_permm
+	
+	// set void trial back to 0
+	vars.void_trial = 0
+	__end__
+
+define inline_javascript experiment_prep_1
+	set description "Executes JavaScript code (ECMA 5.1)"
+	set _run ""
+	___prepare__
+	// preparing for the experiment
+	// calculate mm per pixel based on debit card actual length + pixels of line from this 
+	vars.card_pix = vars.screen_test_x2 - vars.screen_test_x1
+	vars.pix_permm = vars.card_pix/vars.card_mm //x resolution divided by widthx10
+	
+	// start-point of the line
+	vars.left_pix = vars.pix_permm*vars.left_mm
+	vars.right_pix = vars.pix_permm*vars.right_mm
+	vars.y_pix = vars.pix_permm*vars.line_y_pos
+	
+	// get line length in pixels for later calc
+	vars.linelength_pix = vars.right_pix - vars.left_pix
+	
+	// click box locations
+	vars.mouse_loc_pix = vars.mouse_loc*vars.pix_permm
+	vars.click_pix_y = 35*vars.pix_permm
+	vars.mouse_loc_pix_y = 25*vars.pix_permm
+	
+	// set void trial back to 0
+	vars.void_trial = 0
+	__end__
+
+define sequence experiment_sequence
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run line_bisection_intro always
+	run practice_loop always
+	run experiment_start always
+	run experiment_loop always
+	run end always
+
+define sketchpad experiment_start
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=32 html=yes show_if=always text="The practice is now over<br /><br />To start the main task press SPACE<br /><br />This will last about 5 minutes" x=0 y=0 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=18 html=yes show_if=always text="" x=-32 y=-32 z_index=0
+
+define inline_javascript java_global_prep
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	// packages useful for generating random arrays and selecting from them
+	// handing for varying target onset time
+	//import random from 'random'
+	//from random import choice
+	//import numpy as np
+	
+	//import math
+	
+	//beep = items['beep']
+	//blank = items['blank']
+	
+	//response items
+	//stim, response = items['line'], items['line_mouse_response']
+	
+	// screen measurement variables that need defining
+	vars.breaking_variable = false
+	// line location
+	vars.screen_test_x1 = -450
+	vars.screen_test_x2 = 0
+	vars.line_y_pos = 0
+	vars.card_mm = 85 //for finding mm per pix
+	vars.response_mouseclick_done = 0
+	
+	//LocalDate date = LocalDate.now()
+	//t0 = clock.time()
+	
+	// recording log file specfic to experiment
+	//subject_nr_string = Integer.toString(vars.subject_nr)
+	//data_path = u'/home/experimenter/DMT-AD/DMT2019_rawdata/'
+	//vars.data_string = 'subject{sub}_{title}_{date}.csv'
+	
+	vars.response = "None"
+	__end__
+	set _prepare ""
+
+define sketchpad line
+	set duration 0
+	set description "Displays stimuli"
+	draw line color=white penwidth=5 show_if=always x1="[left_pix]" x2="[right_pix]" y1="[y_pix]" y2="[y_pix]" z_index=0
+
+define sketchpad line_1
+	set duration 0
+	set description "Displays stimuli"
+	draw line color=white penwidth=5 show_if=always x1="[left_pix]" x2="[right_pix]" y1="[y_pix]" y2="[y_pix]" z_index=0
+
+define logger line_bisect_logger
+	set description "Logs experimental data"
+	set auto_log yes
+
+define logger line_bisect_logger_1
+	set description "Logs experimental data"
+	set auto_log no
+	log avg_rt
+	log card_mm
+	log card_pix
+	log count_line_bisection
+	log bisect_x
+	log bisect_y
+	log datetime
+	log left_mm
+	log left_pix
+	log right_mm
+	log right_pix
+	log line
+	log linelength_mm
+	log line_response_time
+	log line_y_pos
+	log mouse_pos
+	log pix_permm
+	log void_trial
+	log linelength_pix
+	log subject_nr
+	log EHI_writing
+	log EHI_throwing
+	log EHI_toothbrush
+	log EHI_spoon
+	log practice
+
+define sequence line_bisection
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run experiment_prep always
+	run line always
+	run line_mouse_response always
+	run click_here_1 always
+	run click_here_resp always
+	run valid_check always
+	run line_bisect_logger always
+	run repeat_ybelow always
+	run repeat_yabove always
+
+define sketchpad line_bisection_intro
+	set duration keypress
+	set description "Displays stimuli"
+	draw textline center=1 color=white font_bold=yes font_family=mono font_italic=no font_size=32 html=yes show_if=always text="LINE BISECTION TASK" x=0 y=-384 z_index=0
+	draw textline center=1 color=white font_bold=no font_family=mono font_italic=no font_size=32 html=yes show_if=always text="In this next part of the experiment you will see a line.<br /><br />Your task is to click the MIDDLE of the line. <br />Once you have done this, you will be <br />asked to click a dot towards the bottom of the screen.<br /><br />Please note we are interested in how you perceive the mid-point of the line, <br />so please DO NOT use any additional tools.<br /><br />If you do not click on or near the line, the trial will be repeated.<br /><br />You will first be given some practice trials to get you used to the task. <br /><br />When you are ready, press SPACE" x=0 y=0 z_index=0
+
+define sequence line_bisection_prac
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run experiment_prep_1 always
+	run line_1 always
+	run line_mouse_response_1 always
+	run click_here_1_1 always
+	run click_here_resp_1 always
+	run valid_check_1 always
+	run repeat_ybelow_1 always
+	run repeat_yabove_1 always
+
+define mouse_response line_mouse_response
+	set timeout infinite
+	set show_cursor yes
+	set linked_sketchpad line
+	set flush yes
+	set event_type mouseclick
+	set duration mouseclick
+	set description "Collects mouse responses"
+	set allowed_responses left_button
+
+define mouse_response line_mouse_response_1
+	set timeout infinite
+	set show_cursor yes
+	set linked_sketchpad line_1
+	set flush yes
+	set event_type mouseclick
+	set duration mouseclick
+	set description "Collects mouse responses"
+	set allowed_responses left_button
+
+define sequence main
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run outside_loop always
+
+define mouse_response mouseclick_done
+	set timeout infinite
+	set show_cursor yes
+	set linked_sketchpad ""
+	set flush yes
+	set event_type mouseclick
+	set duration mouseclick
+	set description "Collects mouse responses"
+
+define sketchpad new_sketchpad
+	set duration keypress
+	set description "Displays stimuli"
+
+define loop outside_loop
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 empty_column ""
+	run outside_sequence
+
+define sequence outside_sequence
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run java_global_prep always
+	run screen_loop always
+	run experiment_sequence always
+
+define loop practice_loop
+	set source_file ""
+	set source table
+	set repeat 1
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 8
+	set continuous no
+	set break_if_on_first yes
+	set break_if never
+	setcycle 0 left_mm -40
+	setcycle 0 right_mm 40
+	setcycle 0 mouse_loc 15
+	setcycle 1 left_mm -40
+	setcycle 1 right_mm 80
+	setcycle 1 mouse_loc 15
+	setcycle 2 left_mm -80
+	setcycle 2 right_mm 40
+	setcycle 2 mouse_loc 15
+	setcycle 3 left_mm -80
+	setcycle 3 right_mm 80
+	setcycle 3 mouse_loc 15
+	setcycle 4 left_mm -40
+	setcycle 4 right_mm 40
+	setcycle 4 mouse_loc -15
+	setcycle 5 left_mm -40
+	setcycle 5 right_mm 80
+	setcycle 5 mouse_loc -15
+	setcycle 6 left_mm -80
+	setcycle 6 right_mm 40
+	setcycle 6 mouse_loc -15
+	setcycle 7 left_mm -80
+	setcycle 7 right_mm 80
+	setcycle 7 mouse_loc -15
+	run line_bisection_prac
+
+define sequence practice_sequence
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+
+define inline_javascript repeat
+	set description "Executes JavaScript code (ECMA 5.1)"
+	set _run "if vars.response_screen"
+	set _prepare ""
+
+define repeat_cycle repeat_screen_measurement
+	set description "Optionally repeat a cycle from a loop"
+	set condition "[response_screen_key]!=space"
+
+define repeat_cycle repeat_yabove
+	set description "Optionally repeat a cycle from a loop"
+	set condition "[cursor_y] < -100"
+
+define repeat_cycle repeat_yabove_1
+	set description "Optionally repeat a cycle from a loop"
+	set condition "[cursor_y] < -100"
+
+define repeat_cycle repeat_ybelow
+	set description "Optionally repeat a cycle from a loop"
+	set condition "[cursor_y] < 100"
+
+define repeat_cycle repeat_ybelow_1
+	set description "Optionally repeat a cycle from a loop"
+	set condition "[cursor_y] < 100"
+
+define inline_javascript screen_info
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	// changing screen variables depending on keyboard response
+	if (vars.response_screen_key == 'left') {	
+		vars.screen_test_x2 = vars.screen_test_x2 - 5
+		vars.breaking_variable = false
+	}
+	
+	if (vars.response_screen_key == "right") {
+		vars.screen_test_x2 = vars.screen_test_x2 + 5
+		vars.breaking_variable = false
+	} 
+	
+	if (vars.response == "space") {
+		vars.breaking_variable = true
+	}
+	
+	
+	if (vars.response == "SPACE") {
+		vars.breaking_variable = true
+	}
+	__end__
+	set _prepare ""
+
+define keyboard_response screen_key
+	set timeout infinite
+	set flush yes
+	set event_type keypress
+	set duration keypress
+	set description "Collects keyboard responses"
+	set allowed_responses "right;left;space;y"
+
+define loop screen_loop
+	set source table
+	set repeat 50
+	set order random
+	set description "Repeatedly runs another item"
+	set cycles 1
+	set continuous no
+	set break_if_on_first yes
+	set break_if "[response] = y"
+	setcycle 0 empty_column ""
+	run screen_sequence
+
+define sketchpad screen_measurements
+	set duration 0
+	set description "Displays stimuli"
+	draw line color=white penwidth=5 show_if=always x1="[screen_test_x1]" x2="[screen_test_x2]" y1=-200 y2=-200 z_index=0
+	draw textline center=0 color=white font_bold=no font_family=sans font_italic=no font_size=32 html=yes show_if=always text="Before the next task, we need to know the resolution of your screen.<br /><br />Place the long edge of a DEBIT/CREDIT card against the line. <br />Press the LEFT or RIGHT arrow keys to adjust length of the line until it is the same length as the debit/credit card<br /><br />When ready, press the 'Y' key to continue" x=-832 y=0 z_index=0
+
+define sequence screen_sequence
+	set flush_keyboard yes
+	set description "Runs a number of items in sequence"
+	run screen_measurements always
+	run screen_key always
+	run screen_info always
+
+define inline_javascript valid_check
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	// marking voided trial when they click outside bounds of line
+	if (vars.cursor_y > (vars.pix_permm*10)){
+		vars.void_trial = 1
+	}
+	
+	if (vars.cursor_y < (vars.pix_permm*-10)){
+		vars.void_trial = 1
+	}
+		
+	if (vars.cursor_x < (vars.left_pix)){
+		vars.void_trial = 1
+	}
+		
+	if (vars.cursor_x > (vars.right_pix)){
+		vars.void_trial = 1
+	}
+	
+	vars.practice = 0
+	__end__
+	set _prepare ""
+
+define inline_javascript valid_check_1
+	set description "Executes JavaScript code (ECMA 5.1)"
+	___run__
+	// marking voided trial when they click outside bounds of line
+	if (vars.cursor_y > (vars.pix_permm*10)){
+		vars.void_trial = 1
+	}
+	
+	if (vars.cursor_y < (vars.pix_permm*-10)){
+		vars.void_trial = 1
+	}
+		
+	if (vars.cursor_x < (vars.left_pix)){
+		vars.void_trial = 1
+	}
+		
+	if (vars.cursor_x > (vars.right_pix)){
+		vars.void_trial = 1
+	}
+	
+	vars.practice = 0
+	__end__
+	set _prepare ""
+
