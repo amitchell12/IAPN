@@ -88,12 +88,12 @@ write.csv(QData, "all_questionnaire_data.csv", row.names = FALSE)
 # get list of all .csv files in data folder (this might be both questionnaire and bisectiond data)
 csvfilenames <- dir(dataPath, recursive = TRUE, full.names = FALSE, pattern = '.csv')
 # create empty .csv with key data
-bisectData <- read.csv(text = 'bisect_,bisect_y,card_mm,card_pix,coordinates,count_line_bisection,left_mm,left_pix,line_y_pos,linelength_pix,,mouse_loc,mouse_loc_pix,mouse_loc_pix_y,pix_per_mm,response_time,right_mm,right_pix,screen_centre_x,screen_centre_y,screen_left_x,screen_left_y,screen_right_x,screen_right_y,workerId,ID')
+bisectData <- read.csv(text = 'bisect_,bisect_y,card_mm,card_pix,coordinates,count_line_bisection,left_mm,left_pix,line_y_pos,linelength_pix,mouse_loc,pix_per_mm,response_time,right_mm,right_pix,screen_centre_x,screen_centre_y,screen_left_x,screen_left_y,screen_right_x,screen_right_y,workerId,ID')
 
 # extract key data from all bisection .csv files
 for (file in csvfilenames){
   if (isTRUE(substr(basename(file), 6, 6)=="B")){
-    tmp <- read.csv(file)[, c(9,10,13,14,23,45,90:93,95:97,100,114,125,126,129:134,191)]
+    tmp <- read.csv(file)[, c(9,10,13,14,23,45,90:93,95,100,114,125,126,129:134,191)]
     tmp$ID <- substr(basename(file), 1, 4) 
     # merge data together
     bisectData <- rbind(bisectData, tmp)
@@ -138,5 +138,3 @@ bisectData$y_err_mm <- (bisectData$bisect_y - bisectData$screen_centre_y)/bisect
 
 # save data frame
 write.csv(bisectData, 'IAPN_bisection_data.csv', row.names = FALSE)
-
-
