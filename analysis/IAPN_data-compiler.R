@@ -138,3 +138,7 @@ bisectData$y_err_mm <- (bisectData$bisect_y - bisectData$screen_centre_y)/bisect
 
 # save data frame
 write.csv(bisectData, 'IAPN_bisection_data.csv', row.names = FALSE)
+
+
+#### ANALYSIS
+
