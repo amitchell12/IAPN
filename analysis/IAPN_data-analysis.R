@@ -1,6 +1,7 @@
 ## IAPN DATA ANALYSIS
 library(lme4) #<- YOU WILL NEED TO INSTALL THIS PACKAGE
 library(reshape2)
+library(ggpubr)
 
 # import relevant files
 MAIA2Data <- read.csv('IAPN_MAIA2_data.csv')
@@ -30,8 +31,33 @@ ggplot(EPW) +
   geom_point(aes(dPR, dPL)) +
   xlim(0, 1) + ylim(0, 1)
 
+EPW <- EPW[EPW$dPR < 1 ,]
+
 ## summary stats
 # summary P for each participant
 EWdata <- aggregate(P ~ ID, mean, data = bisectData)
 # add dPL and dPR
 EWdata <- merge(EWdata, EPW, by = 'ID')
+EWdata$EWB <- EWdata$dPR - EWdata$dPL
+EWdata$EWS <- EWdata$dPR + EWdata$dPL
+
+##### MAIA2 MEAN #####
+MAIA2Data <- MAIA2Data[, c(3:40)]
+# melt so response all in one column
+INall <- melt(MAIA2Data)
+INsum <- aggregate(value ~ ID, sum, data = INall)
+names(INsum)[2] <- 'MAIAscore'
+# merge with bisection data
+EWdata <- merge(EWdata, INsum, by = 'ID')
+
+ggplot(EWdata) +
+  geom_point(aes(MAIAscore, EWB)) +
+  ylim(-0.5,0.5)
+
+ggplot(EWdata) +
+  geom_point(aes(MAIAscore, EWS))
+
+
+test <- cor(EWdata$EWB, EWdata$MAIAscore)
+
+
